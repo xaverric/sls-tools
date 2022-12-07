@@ -1,10 +1,10 @@
 const { cmdArguments } = require('../cli/arguments');
 const { usage } = require('../cli/usage');
-const { download, help} = require('../../');
+const { exportData, help} = require('../../data-exporter');
 
 const COMMANDS = {
   COMMAND_HELP: 'help',
-  COMMAND_DOWNLOAD: 'download'
+  COMMAND_EXPORT: 'export'
 };
 
 const actions = {
@@ -13,8 +13,8 @@ const actions = {
     action: async () => await help(usage)
   },
   downloadConfig: {
-    condition: () => handleCondition(cmdArguments.command === COMMANDS.COMMAND_DOWNLOAD),
-    action: async () => await download(cmdArguments)
+    condition: () => handleCondition(cmdArguments.command === COMMANDS.COMMAND_EXPORT),
+    action: async () => await exportData(cmdArguments)
   }
 };
 

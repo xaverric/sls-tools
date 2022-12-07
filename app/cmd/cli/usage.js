@@ -3,7 +3,7 @@ const { cmdArgumentsDefinition } = require('./arguments.js');
 
 const usageDefinition = [
   {
-    header: 'Data Downloader',
+    header: 'Data Exporter',
     content: 'An amazing command line tool allowing you to download any data or configuration'
   },
   {
@@ -14,7 +14,7 @@ const usageDefinition = [
     header: 'Commands',
     content: [
       { name: 'help', summary: 'Display this help.' },
-      { name: 'download', summary: 'Downloads any configuration based on given parameters and configuration.' }
+      { name: 'export', summary: 'Downloads any configuration based on given parameters and configuration.' }
     ]
   },
   {
