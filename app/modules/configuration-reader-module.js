@@ -1,3 +1,4 @@
+
 const path = require("path");
 
 /**
@@ -6,10 +7,12 @@ const path = require("path");
  * @param {string} filePath 
  * @returns 
  */
+
 const readJsFile = filePath => {
     let data;
     try {
         data = require(filePath);
+
     } catch (err) {
         throw new Error(`Error occurred during loading file ${filePath}. Err: ${err}`);
     }
@@ -17,14 +20,12 @@ const readJsFile = filePath => {
 };
 
 const readEnvironmentConfiguration = cmdArgs => {
+
     let filePath = path.resolve(`${cmdArgs.config}/config.js`);
     return readJsFile(filePath);
 };
 
-
-
 module.exports = {
     readEnvironmentConfiguration
-
 
 }
