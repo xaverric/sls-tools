@@ -1,4 +1,3 @@
-const fs = require("fs");
 const path = require("path");
 
 /**
@@ -7,10 +6,10 @@ const path = require("path");
  * @param {string} filePath 
  * @returns 
  */
-const readJsonFile = filePath => {
+const readJsFile = filePath => {
     let data;
     try {
-        data = JSON.parse(fs.readFileSync(filePath));
+        data = require(filePath);
     } catch (err) {
         throw new Error(`Error occurred during loading file ${filePath}. Err: ${err}`);
     }
@@ -18,24 +17,14 @@ const readJsonFile = filePath => {
 };
 
 const readEnvironmentConfiguration = cmdArgs => {
-    let filePath = path.resolve(`${cmdArgs.config}/${cmdArgs.environment}.json`);
-    return readJsonFile(filePath);
+    let filePath = path.resolve(`${cmdArgs.config}/config.js`);
+    return readJsFile(filePath);
 };
 
-const readContextConfiguration = cmdArgs => {
-    let filePath = path.resolve(`${cmdArgs.config}/contexts.json`);
-    let contexts = readJsonFile(filePath);
-    let environmentDetails = contexts.find(context => context.environment === cmdArgs.environment);
-    return environmentDetails
-};
 
-const readNodeSizeConfiguration = cmdArgs => {
-    let filePath = path.resolve(`${cmdArgs.config}/nodesizes.json`);
-    return readJsonFile(filePath);
-}
 
 module.exports = {
-    readEnvironmentConfiguration,
-    readContextConfiguration,
-    readNodeSizeConfiguration
+    readEnvironmentConfiguration
+
+
 }

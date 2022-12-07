@@ -1,7 +1,18 @@
-const { usage } = require("./cmd/cli/usage")
+const {usage} = require("./cmd/cli/usage")
+const {readEnvironmentConfiguration} = require("./modules/configuration-reader-module");
+const {storeFileJson, storeFileBin} = require("./modules/file-export-module")
 
-const exportData = async () => {
-    console.log("export");
+
+
+const exportData = async (cmdArgs) => {
+    let {tempDir, uuApp, k8s, bookkit, exports} = readEnvironmentConfiguration(cmdArgs)
+//just for testing
+    for (const exportObject of exports) {
+       //storeFileJson(tempDir ,exportObject.name, JSON.stringify(uuApp))
+
+        storeFileBin(tempDir ,exportObject.name, Buffer.from(JSON.stringify(uuApp), "binary"), exportObject.type)
+    }
+
 }
 
 const help = () => {
