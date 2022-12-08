@@ -1,26 +1,25 @@
-
-
-const createBaseUri = (configuration) => {
-    let host = configuration.uuApp.host;
+const resolveUuAppBaseUri = configuration => {
     for (const subApp of configuration.uuApp.subAppList) {
-        subApp.baseUri = `${host}/${subApp.context}/${subApp.workspace}`
+        subApp.baseUri = `${configuration.uuApp.host}/${subApp.context}/${subApp.workspace}`
     }
     return configuration;
 }
-const baseUriMergeCmd = (configuration) => {
-    let baseUris = new Map();
-    for (const subApp of configuration.uuApp.subAppList) {
-        baseUris.set(subApp.context,subApp.baseUri)
-    }
-    for (const cmdExport of configuration.exports) {
-       cmdExport.baseUri = `${baseUris.has(cmdExport.uuApp)}/${cmdExport.command}`
 
-    }
-
+const resolveCmdExportItemCommand = configuration => {
+    configuration.exports
+        .filter(exportItem => exportItem.exportType === "cmd")
+        .forEach(exportItem => {
+            exportItem.command = [_findSubAppConfiguration(configuration, exportItem)?.baseUri, exportItem.command].join("/");
+            return exportItem;
+        });
     return configuration;
+}
+
+const _findSubAppConfiguration = (configuration, exportItem) => {
+    return configuration.uuApp.subAppList.find(subApp => subApp.name === exportItem.uuApp);
 }
 
 module.exports = {
-    createBaseUri,
-    baseUriMergeCmd
+    resolveUuAppBaseUri,
+    resolveCmdExportItemCommand
 }

@@ -1,5 +1,7 @@
 const {CONSOLE_LOG} = require("../logger/logger");
 const {handleCmdExport} = require("./cmd/cmd-data-exporter");
+const {fullExport} = require("./zip/zip-exporter");
+const {handleK8sExport} = require("./k8s/k8s-data-exporter");
 
 const EXPORTERS = [
     {
@@ -7,9 +9,8 @@ const EXPORTERS = [
         exportAction: (exportItem) => handleCmdExport(exportItem)
     },
     {
-        // TODO k8s exporter type
         condition: type => type === "k8s",
-        exportAction: (exportItem) => CONSOLE_LOG.info("TODO")
+        exportAction: (exportItem) => handleK8sExport(exportItem)
     }
 ]
 
@@ -23,12 +24,14 @@ const _decideExporter = (type) => {
 
 const exportData = async (cmdArgs, configuration) => {
     for (const exportType of cmdArgs.exportType) {
-        CONSOLE_LOG.info(`exporting data using ${exportType} export type`);
+        CONSOLE_LOG.info(`Exporting data using ${exportType} export type`);
         let filteredItems = configuration.exports.filter(item => item.exportType === exportType);
         for (const exportItem of filteredItems) {
             await _decideExporter(exportItem.exportType).exportAction(exportItem);
         }
     }
+
+    cmdArgs.fullExport && fullExport(configuration);
 }
 
 module.exports = {

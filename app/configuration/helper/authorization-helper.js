@@ -8,7 +8,22 @@ const resolveUuAppAuthorization = async configuration => {
     return configuration;
 }
 
+const resolveCmdExportItemToken = configuration => {
+    configuration.exports
+        .filter(exportItem => exportItem.exportType === "cmd")
+        .forEach(exportItem => {
+            const oidcIdentity = _findSubAppConfiguration(configuration, exportItem)?.auth;
+            exportItem.token = configuration.uuApp.oidc[oidcIdentity].token;
+            return exportItem;
+        });
+    return configuration;
+}
+
+const _findSubAppConfiguration = (configuration, exportItem) => {
+    return configuration.uuApp.subAppList.find(subApp => subApp.name === exportItem.uuApp);
+}
 
 module.exports = {
-    resolveUuAppAuthorization
+    resolveUuAppAuthorization,
+    resolveCmdExportItemToken
 }

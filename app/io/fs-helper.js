@@ -1,5 +1,6 @@
 const fs = require ("fs");
 const path = require ("path");
+const {CONSOLE_LOG} = require("../logger/logger");
 
 /**
  * Create directory on given path recursively if does not exist.
@@ -8,10 +9,8 @@ const path = require ("path");
  */
 const createDirectoryIfNotExist = directoryPath => {
     if (!fs.existsSync(directoryPath)) {
-        console.log(`Directory structure ${directoryPath} does not exist.`);
         fs.mkdirSync(directoryPath, { recursive: true });
-        console.log(`Directory structure ${directoryPath} created.`);
-
+        CONSOLE_LOG.info(`Directory structure ${directoryPath} created.`);
     }
 }
 
@@ -29,7 +28,21 @@ const getFilePath = (directory, fileName) => {
 const storeFile = (directory, fileName, content) => {
     createDirectoryIfNotExist(directory);
     fs.writeFileSync(getFilePath(directory, fileName), content);
-    console.log(`File ${fileName} stored successfully into the "${directory}" location.`);
+    CONSOLE_LOG.info(`File ${fileName} stored successfully into the "${directory}" location.`);
 }
 
-module.exports = {storeFile, getFilePath}
+const loadFile = async path => {
+    let file = require(path);
+    if (typeof file === "function") {
+        let loadedFile = await file();
+        return loadedFile;
+    }
+    return file;
+}
+
+module.exports = {
+    storeFile,
+    loadFile,
+    getFilePath,
+    createDirectoryIfNotExist
+}

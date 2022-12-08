@@ -1,4 +1,5 @@
 const {default: axios} = require("axios");
+const {CONSOLE_LOG} = require("../logger/logger");
 
 /**
  * call any command over uuApp API
@@ -10,7 +11,7 @@ const {default: axios} = require("axios");
  * @returns {Promise<any>}
  */
 const callCommand = async (url, method, data, token = null, options = {}) => {
-    console.log(`Call command ${url}`);
+    CONSOLE_LOG.info(`Call command ${url}`);
     const response = await axios(_prepareAxiosConfig(url, data, method, token, options));
     return response.data;
 };
@@ -25,11 +26,14 @@ const _prepareAxiosConfig = (url, data, method, token = null, options = {}) => {
         method: token ? method : 'POST',
         data: JSON.stringify(data)
     };
+    if (options?.binaryContent && options?.binaryContent === "binary") {
+        config.responseType = "arraybuffer";
+        config.headers = {
+            'Content-Type': 'application/zip'
+        }
+    }
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
-    }
-    if (options?.binaryContent) {
-        config.responseType = "arraybuffer";
     }
     return config;
 };

@@ -4,7 +4,7 @@ const { cmdArguments } = require('./app/cmd/cli/arguments.js');
 const { CONSOLE_LOG } = require("./app/logger/logger.js");
 
 const main = async () => {
-  console.log(`Using NodeJS ${process.version}`);
+  CONSOLE_LOG.info(`Using NodeJS ${process.version}`);
   let actionExecuted = false;
   for (const actionName of Object.keys(actions)) {
     // execute first action which meets the condition and terminate the process

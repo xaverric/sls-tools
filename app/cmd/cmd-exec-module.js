@@ -1,11 +1,13 @@
 const util = require('util');
+const {LOG} = require("../logger/logger");
 const exec = util.promisify(require('child_process').exec);
 
-const callCommand = async (command) => {
+const callCliCommand = async (command) => {
+    LOG.debug(command);
     const {stdout} = await exec(command);
     return stdout; 
 };
 
 module.exports = {
-    callCommand
+    callCliCommand
 }

@@ -4,11 +4,11 @@
   "description": "",
   "main": "cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Daniel Jílek & Zdeněk Tejnecký",
   "license": "ISC",
   "dependencies": {
+    "adm-zip": "^0.5.9",
     "axios": "^1.2.1",
     "command-line-args": "^5.2.1",
     "command-line-usage": "^6.1.3",
