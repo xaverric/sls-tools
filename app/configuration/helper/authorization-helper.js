@@ -8,6 +8,7 @@ const resolveUuAppAuthorization = async configuration => {
     return configuration;
 }
 
+
 module.exports = {
     resolveUuAppAuthorization
 }
