@@ -18,6 +18,11 @@ const cmdArgumentsDefinition = [
     type: String,
     multiple: true,
     description: 'cmd|k8s'
+  },
+  {
+    name: 'fullExport',
+    type: Boolean,
+    description: 'Flag defining whether all exported files should be published as a single zip file.'
   }
 ];
 

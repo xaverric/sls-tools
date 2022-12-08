@@ -1,6 +1,6 @@
 const { cmdArguments } = require('../cli/arguments');
 const { usage } = require('../cli/usage');
-const { exportData, help} = require('../../data-exporter');
+const { runExport, runHelp} = require('../../data-exporter');
 
 const COMMANDS = {
   COMMAND_HELP: 'help',
@@ -8,13 +8,13 @@ const COMMANDS = {
 };
 
 const actions = {
-  showHelp: {
+  runHelp: {
     condition: () => handleCondition(cmdArguments.command === COMMANDS.COMMAND_HELP || cmdArguments.help || Object.keys(cmdArguments).length === 0),
-    action: async () => await help(usage)
+    action: async () => await runHelp(usage)
   },
-  downloadConfig: {
+  runExport: {
     condition: () => handleCondition(cmdArguments.command === COMMANDS.COMMAND_EXPORT),
-    action: async () => await exportData(cmdArguments)
+    action: async () => await runExport(cmdArguments)
   }
 };
 

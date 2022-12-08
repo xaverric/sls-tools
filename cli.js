@@ -25,5 +25,5 @@ const processErrorMessages = (actionExecuted) => {
 main().then(() => {
   process.stdin.destroy();
 }).catch((e) => {
-  CONSOLE_LOG.error(`Error in application : ${e.stack}`);
+  CONSOLE_LOG.error(`Error in application : ${JSON.stringify(e.stack, null, 4)}`);
 });
