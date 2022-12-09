@@ -23,6 +23,12 @@ const cmdArgumentsDefinition = [
     name: 'fullExport',
     type: Boolean,
     description: 'Flag defining whether all exported files should be published as a single zip file.'
+  },
+  {
+    name: 'visualize',
+    alias: 'b',
+    type: Boolean,
+    description: 'Flag defining whether all exported files should be visualize in bookkit.'
   }
 ];
 

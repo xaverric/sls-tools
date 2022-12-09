@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "cli.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "Daniel Jílek & Zdeněk Tejnecký",
   "license": "ISC",
   "dependencies": {
