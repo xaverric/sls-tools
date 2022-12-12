@@ -1,4 +1,5 @@
 const {readConfiguration} = require("./configuration/configuration-reader");
+const {processVisualizations} = require("./bookkit/visualizations-service");
 const { exportData } = require("./exporter/exporter-service");
 const {CONSOLE_LOG} = require("./logger/logger");
 
@@ -11,7 +12,7 @@ const {CONSOLE_LOG} = require("./logger/logger");
 const runExport = async (cmdArgs) => {
     let configuration = await readConfiguration(cmdArgs);
     await exportData(cmdArgs, configuration);
-    await visualizeBK(cmdArgs, configuration)
+    await processVisualizations(cmdArgs, configuration)
 }
 
 const runHelp = (usage) => {
