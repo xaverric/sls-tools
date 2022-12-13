@@ -11,6 +11,7 @@ const {CONSOLE_LOG} = require("./logger/logger");
  */
 const runExport = async (cmdArgs) => {
     let configuration = await readConfiguration(cmdArgs);
+
     await exportData(cmdArgs, configuration);
     await processVisualizations(cmdArgs, configuration)
 }
