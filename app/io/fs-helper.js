@@ -39,6 +39,7 @@ const loadFile = async path => {
     }
     return file;
 }
+// TODO loadJsonFile
 
 module.exports = {
     storeFile,

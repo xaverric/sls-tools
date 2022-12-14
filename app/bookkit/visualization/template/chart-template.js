@@ -1,4 +1,6 @@
-const { escapeUu5StringArray} = require("../../helper/uu5string-escape-helper");
+const {escapeUu5StringArray} = require("../../helper/uu5string-escape-helper");
+
+// TODO rename, not chart template but table template
 
 const template = (table, configuration) => {
 

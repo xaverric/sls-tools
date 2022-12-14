@@ -30,6 +30,7 @@ const cmdArgumentsDefinition = [
     type: Boolean,
     description: 'Flag defining whether all exported files should be visualize in bookkit.'
   }
+  // TODO new boolean flag attribute to allow upload fullExport to bookkit (not needed for visualization)
 ];
 
 const cmdArguments = commandLineArgs(cmdArgumentsDefinition, { stopAtFirstUnknown: true });

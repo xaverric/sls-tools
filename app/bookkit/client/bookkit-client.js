@@ -19,6 +19,9 @@ const updateSection = async (baseUri, page, code, content, token) => {
     await callCommand(`${baseUri}/unlockPageSection`, "POST", { code: code, page: page }, token);
 }
 
+// TODO implement fileUpload to bookkit
+// TODO implement createSection with new content
+
 module.exports = {
     updateSection
 

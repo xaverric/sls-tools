@@ -6,6 +6,7 @@ const {currentDateWithTime} = require("../../utils/data-utils");
 
 const fullExport = (configuration) => {
     CONSOLE_LOG.info(`Zipping whole content in ${configuration.tempDir} to ${configuration.uuApp.name}_${currentDateWithTime()}_full_export.zip`);
+    // TODO store fullexport filename within configuration
     let zipFilePath = getFilePath(configuration.tempDir, `${configuration.uuApp.name}_${currentDateWithTime()}_full_export.zip`)
 
     let zipContent = new AdmZip();
