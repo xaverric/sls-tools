@@ -1,22 +1,15 @@
 const path = require("path");
-const fs = require("fs")
-const {error} = require("winston");
+const {loadJsonFile} = require("../../../io/fs-helper");
 
-const readJsonFileForVisualization = async (exportItem) => {
+const DEFAULT_ITEM_LIST_NAME = "itemList";
+
+const readDataForVisualization = async (exportItem) => {
     const filePath = path.join(exportItem.tempDir, exportItem.name);
-    // TODO implement loadJsonFile in fs-helper.js
-    // TODO extract list from jsonContent by exportItem.visualization.itemList name and return this list from the function
-    let data = null;
-    try {
-        data = fs.readFileSync(filePath)
-        data = JSON.parse(data)
-    } catch (e) {
-        throw error("Could not load data")
-    }
-
-    return data
+    const data = loadJsonFile(filePath);
+    const itemListName = exportItem.itemListName ? exportItem.itemListName : DEFAULT_ITEM_LIST_NAME;
+    return data[itemListName];
 }
 
 module.exports = {
-    readJsonFileForVisualization
+    readDataForVisualization
 }

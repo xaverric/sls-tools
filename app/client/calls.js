@@ -1,4 +1,5 @@
 const {default: axios} = require("axios");
+const FormData = require("form-data");
 const {CONSOLE_LOG} = require("../logger/logger");
 
 /**
@@ -21,7 +22,8 @@ const _prepareAxiosConfig = (url, data, method, token = null, options = {}) => {
         url: url,
         headers: {
             'Content-Type': 'application/json',
-            Accept: 'application/json'
+            Accept: 'application/json',
+            "Accept-Encoding": "gzip,deflate,compress"
         },
         method: token ? method : 'POST',
         data: JSON.stringify(data)
@@ -38,4 +40,21 @@ const _prepareAxiosConfig = (url, data, method, token = null, options = {}) => {
     return config;
 };
 
-module.exports = {callCommand}
+const callFormPostCommand = async (url, data, token) => {
+    CONSOLE_LOG.info(`Call command ${url}`);
+    const formData = new FormData();
+    formData.append("data", data);
+    const response = await axios.post(url, formData, {
+        headers: {
+            ...formData.getHeaders(),
+            Authorization: `Bearer ${token}`,
+            "Accept-Encoding": "gzip,deflate,compress"
+        }
+    });
+    return response.data;
+};
+
+module.exports = {
+    callCommand,
+    callFormPostCommand
+}

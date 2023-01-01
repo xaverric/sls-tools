@@ -3,12 +3,12 @@ const { cmdArgumentsDefinition } = require('./arguments.js');
 
 const usageDefinition = [
   {
-    header: 'Data Exporter',
-    content: 'An amazing command line tool allowing you to download any data or configuration'
+    header: 'sls-tools',
+    content: "Your daily helper tool you didn't know you needed"
   },
   {
     header: 'Synopsis',
-    content: '$udc <command> <command parameters>'
+    content: '$sls-tools <command> <command parameters>'
   },
   {
     header: 'Commands',

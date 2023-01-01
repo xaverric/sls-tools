@@ -16,10 +16,10 @@ const getConfigMap = async exportItem => {
 
 const getArrayFromLineContent = (lines) => {
     return lines.toString()
-        .replace(/} {/g, "};{")
+        .replace(/} {/g, "}||||{")
         .slice(1)
         .slice(0, -1)
-        .split(";");
+        .split("||||");
 };
 
 const getConfigMapDetail = line => {

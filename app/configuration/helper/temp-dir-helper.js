@@ -7,7 +7,7 @@ const resolveTempDir = configuration => {
     createDirectoryIfNotExist(configuration.tempDir);
 
     configuration.exports.forEach(exportItem => {
-        exportItem.tempDir = path.resolve(configuration.tempDir, exportItem.exportType);
+        exportItem.tempDir = path.resolve(configuration.tempDir, exportItem.exportType, exportItem.outDirectory ? exportItem.outDirectory : "");
     });
 
     return configuration;

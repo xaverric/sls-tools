@@ -8,6 +8,11 @@ const resolveUuAppAuthorization = async configuration => {
     return configuration;
 }
 
+const resolveBookkitAuthorization = async configuration => {
+    configuration.bookkit.token = await login(configuration.bookkit.oidcHost, configuration.bookkit.accessCode1, configuration.bookkit.accessCode2);
+    return configuration
+}
+
 const resolveCmdExportItemToken = configuration => {
     configuration.exports
         .filter(exportItem => exportItem.exportType === "cmd")
@@ -25,5 +30,6 @@ const _findSubAppConfiguration = (configuration, exportItem) => {
 
 module.exports = {
     resolveUuAppAuthorization,
+    resolveBookkitAuthorization,
     resolveCmdExportItemToken
 }

@@ -1,4 +1,5 @@
-const { callCommand } = require("../../client/calls");
+const { callCommand, callFormPostCommand} = require("../../client/calls");
+
 /**
  * Updates given section on the given page with new uu5String content
  *
@@ -19,10 +20,30 @@ const updateSection = async (baseUri, page, code, content, token) => {
     await callCommand(`${baseUri}/unlockPageSection`, "POST", { code: code, page: page }, token);
 }
 
-// TODO implement fileUpload to bookkit
-// TODO implement createSection with new content
+/**
+ * Creates a new section within given page. Section is added to the top of the page.
+ *
+ * @param baseUri bookkit base uri
+ * @param page page code in the given book
+ * @param content uu5String content to be used within the whole section
+ * @param token authorization token
+ * @returns {Promise<void>}
+ */
+const createSection = async (baseUri, page, content, token) => {
+    await callCommand(`${baseUri}/addPageSection`, "POST", {
+        page: page,
+        content: content,
+        order: 0
+    }, token);
+}
+
+const uploadFile = async (baseUri, data, token) => {
+    return await callFormPostCommand(`${baseUri}/createBinary`, data, token);
+}
 
 module.exports = {
-    updateSection
+    updateSection,
+    createSection,
+    uploadFile
 
 }

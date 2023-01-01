@@ -1,6 +1,6 @@
 const { cmdArguments } = require('../cli/arguments');
 const { usage } = require('../cli/usage');
-const { runExport, runHelp} = require('../../data-exporter');
+const { runExport, runHelp} = require('../../sls-tools');
 
 const COMMANDS = {
   COMMAND_HELP: 'help',

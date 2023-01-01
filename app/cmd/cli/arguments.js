@@ -5,7 +5,7 @@ const cmdArgumentsDefinition = [
     name: 'command',
     defaultOption: true,
     type: String,
-    description: 'download, help commands. All these can be used as default commands without providing --command argument.'
+    description: 'export, help commands. All these can be used as default commands without providing --command argument.'
   },
   {
     name: 'config',
@@ -25,12 +25,17 @@ const cmdArgumentsDefinition = [
     description: 'Flag defining whether all exported files should be published as a single zip file.'
   },
   {
+    name: 'upload',
+    alias: 'u',
+    type: Boolean,
+    description: 'Upload full export data to predefined bookkit page.'
+  },
+  {
     name: 'visualize',
-    alias: 'b',
+    alias: 'v',
     type: Boolean,
     description: 'Flag defining whether all exported files should be visualize in bookkit.'
   }
-  // TODO new boolean flag attribute to allow upload fullExport to bookkit (not needed for visualization)
 ];
 
 const cmdArguments = commandLineArgs(cmdArgumentsDefinition, { stopAtFirstUnknown: true });

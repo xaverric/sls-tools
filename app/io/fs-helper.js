@@ -39,11 +39,27 @@ const loadFile = async path => {
     }
     return file;
 }
-// TODO loadJsonFile
+
+/**
+ * Read JSON file from given file path location and parse its content to the object
+ *
+ * @param {string} filePath
+ * @returns
+ */
+const loadJsonFile = filePath => {
+    let data;
+    try {
+        data = JSON.parse(fs.readFileSync(filePath));
+    } catch (err) {
+        throw new Error(`Error occurred during loading file ${filePath}. Err: ${err}`);
+    }
+    return data;
+};
 
 module.exports = {
     storeFile,
     loadFile,
+    loadJsonFile,
     getFilePath,
     createDirectoryIfNotExist
 }
