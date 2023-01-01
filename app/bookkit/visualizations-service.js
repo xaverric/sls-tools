@@ -5,12 +5,16 @@ const {readDataForVisualization} = require("./visualization/helper/file-reader-h
 
 const processVisualizations = async (configuration) => {
     for (const exportItem of configuration.exports) {
-        if (exportItem.exportType === "cmd" && exportItem.type !== "binary") {
+        if (isVisualizable(exportItem)) {
             let data = await readDataForVisualization(exportItem);
             let uu5StringContent = createUu5String(exportItem, data);
             await updateSection(configuration.bookkit.uri, exportItem.visualize.page, exportItem.visualize.code, uu5StringContent, configuration.bookkit.token);
         }
     }
+}
+
+const isVisualizable = exportItem => {
+    return exportItem.exportType === "cmd" && exportItem.type !== "binary" && exportItem.visualize
 }
 
 
