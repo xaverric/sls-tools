@@ -3,7 +3,7 @@ const os = require("os");
 const {resolveUuAppAuthorization, resolveCmdExportItemToken, resolveBookkitAuthorization} = require("./helper/authorization-helper");
 const {resolveTempDir} = require("./helper/temp-dir-helper");
 const {resolveUuAppBaseUri, resolveCmdExportItemCommand} = require("./helper/uri-helper");
-const {loadFile} = require("../io/fs-helper");
+const {loadFile} = require("../utils/fs-helper");
 const {resolveK8sExportItem} = require("./helper/k8s-export-item-helper");
 
 const CONFIG_DEFAULT_PATH = path.join(os.homedir(), '.sls-tools', 'config.js');

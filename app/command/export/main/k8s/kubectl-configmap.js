@@ -1,5 +1,5 @@
-const {callCliCommand} = require("../cmd/cmd-exec-module.js");
-const {CONSOLE_LOG} = require("../logger/logger");
+const {callCliCommand} = require("../../../../cli/cmd-exec-module.js");
+const {CONSOLE_LOG} = require("../../../../logger/logger");
 
 const getConfigMap = async exportItem => {
     CONSOLE_LOG.info(`Searching for ${exportItem.uuApp} configmap in ${exportItem.context}/${exportItem.namespace}`)

@@ -1,5 +1,5 @@
-const {callCommand} = require("../../client/calls");
-const {storeFile} = require("../../io/fs-helper");
+const {callCommand} = require("../../../../client/calls");
+const {storeFile} = require("../../../../utils/fs-helper");
 
 const handleCmdExport = async (exportItem) => {
     let data = await callCommand(

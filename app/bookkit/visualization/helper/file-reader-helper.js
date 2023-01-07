@@ -1,5 +1,5 @@
 const path = require("path");
-const {loadJsonFile} = require("../../../io/fs-helper");
+const {loadJsonFile} = require("../../../utils/fs-helper");
 
 const DEFAULT_ITEM_LIST_NAME = "itemList";
 

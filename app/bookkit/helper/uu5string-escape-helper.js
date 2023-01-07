@@ -1,5 +1,5 @@
 const escapeUu5StringArray = (array) => {
-    return JSON.stringify(array).replaceAll('\"', '\\"');
+    return JSON.stringify(array, null, 4).replaceAll('\"', '\\"');
 }
 
 const stringifyToEscapedUu5StringObject = (object) => {

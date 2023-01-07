@@ -1,6 +1,6 @@
 const path = require("path");
-const {createDirectoryIfNotExist} = require("../../io/fs-helper");
-const {currentDateWithTime} = require("../../utils/data-utils");
+const {createDirectoryIfNotExist} = require("../../utils/fs-helper");
+const {currentDateWithTime} = require("../../utils/date-utils");
 
 const resolveTempDir = configuration => {
     configuration.tempDir = path.resolve(configuration.tempDir, `${currentDateWithTime()}`);

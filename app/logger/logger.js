@@ -18,7 +18,7 @@ const customConsoleFormat = winston.format.printf(({message}) => {
 const options = {
     fileDebug: {
         level: 'debug',
-        filename: path.join(os.homedir(), '.data-exporter', 'logs', 'debug.log'),
+        filename: path.join(os.homedir(), '.sls-tools', 'logs', 'debug.log'),
         format: customFileFormat,
         handleExceptions: true,
         maxsize: 5242880,

@@ -1,5 +1,5 @@
-const {storeFile} = require("../../io/fs-helper");
-const {getConfigMap} = require("../../k8s/kubectl-configmap");
+const {storeFile} = require("../../../../utils/fs-helper");
+const {getConfigMap} = require("./kubectl-configmap");
 
 const handleK8sExport = async (exportItem) => {
     let configMap = await getConfigMap(exportItem);

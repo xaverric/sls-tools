@@ -1,7 +1,7 @@
 {
   "name": "sls-tools",
-  "version": "1.0.1",
-  "description": "",
+  "version": "1.1.0",
+  "description": "Your daily helper tool you didn't know you needed",
   "main": "cli.js",
   "scripts": {},
   "author": "Daniel Jílek & Zdeněk Tejnecký",

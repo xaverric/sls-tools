@@ -12,29 +12,6 @@ const cmdArgumentsDefinition = [
     alias: 'c',
     type: String,
     description: 'Configuration file path.'
-  },
-  {
-    name: 'exportType',
-    type: String,
-    multiple: true,
-    description: 'cmd|k8s'
-  },
-  {
-    name: 'fullExport',
-    type: Boolean,
-    description: 'Flag defining whether all exported files should be published as a single zip file.'
-  },
-  {
-    name: 'upload',
-    alias: 'u',
-    type: Boolean,
-    description: 'Upload full export data to predefined bookkit page.'
-  },
-  {
-    name: 'visualize',
-    alias: 'v',
-    type: Boolean,
-    description: 'Flag defining whether all exported files should be visualize in bookkit.'
   }
 ];
 

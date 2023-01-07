@@ -1,4 +1,4 @@
-const {CONSOLE_LOG} = require("../logger/logger");
+const {CONSOLE_LOG} = require("../../../logger/logger");
 const {handleCmdExport} = require("./cmd/cmd-data-exporter");
 const {fullExport} = require("./zip/zip-exporter");
 const {handleK8sExport} = require("./k8s/k8s-data-exporter");

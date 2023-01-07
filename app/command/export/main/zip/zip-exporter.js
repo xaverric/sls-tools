@@ -1,8 +1,8 @@
 const AdmZip = require("adm-zip");
-const {getFilePath} = require("../../io/fs-helper");
+const {getFilePath} = require("../../../../utils/fs-helper");
 const fs = require("fs");
-const {CONSOLE_LOG} = require("../../logger/logger");
-const {currentDateWithTime} = require("../../utils/data-utils");
+const {CONSOLE_LOG} = require("../../../../logger/logger");
+const {currentDateWithTime} = require("../../../../utils/date-utils");
 
 const fullExport = (configuration) => {
     CONSOLE_LOG.info(`Zipping whole content in ${configuration.tempDir} to ${configuration.uuApp.name}_${currentDateWithTime()}_full_export.zip`);
