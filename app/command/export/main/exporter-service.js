@@ -27,11 +27,23 @@ const exportData = async (cmdArgs, configuration) => {
         CONSOLE_LOG.info(`Exporting data using ${exportType} export type`);
         let filteredItems = configuration.exports.filter(item => item.exportType === exportType);
         for (const exportItem of filteredItems) {
-            await _decideExporter(exportItem.exportType).exportAction(exportItem);
+            await exportWithRepeat(exportItem);
         }
     }
 
     cmdArgs.fullExport && fullExport(configuration);
+}
+
+const exportWithRepeat = async (exportItem) => {
+    for (let i = 0, repeatLimit = 5; i < repeatLimit; i++) {
+        try {
+            await _decideExporter(exportItem.exportType).exportAction(exportItem);
+            // reset repeatLimit to stop processing and continue
+            repeatLimit = 0;
+        } catch (e) {
+            CONSOLE_LOG.error(e);
+        }
+    }
 }
 
 module.exports = {
