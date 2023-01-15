@@ -83,7 +83,6 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 ### 1.1.0
 * improved command line interface to be more structured, i.e. ```sls-tools export``` command will display help related to the export command only.
 * visualization export improvement - added support to visualize objects
-* 
 
 ## TODO
 - export
