@@ -1,9 +1,8 @@
 const createTableUu5String = require("./visualization/table-visualization-uu5string-builder");
 const createObjectUu5String = require("./visualization/object-visualization-uu5string-builder");
-const {updateSection} = require("../bookkit/client/bookkit-client");
+const {updateSection} = require("../../../../bookkit/client/bookkit-client");
 const {readDataForVisualization} = require("./visualization/helper/file-reader-helper");
-const {CONSOLE_LOG} = require("../logger/logger");
-
+const {CONSOLE_LOG} = require("../../../../logger/logger");
 
 const processVisualizations = async (configuration) => {
     for (const exportItem of configuration.exports) {

@@ -1,11 +1,13 @@
 const { cmdArguments } = require('../cli/arguments');
 const { usage } = require('../cli/usage');
 const { cmdExportArguments } = require("../../command/export/cli/arguments");
-const { runExport, runHelp} = require('../../sls-tools');
+const { cmdCheckArguments } = require("../../command/check/cli/arguments");
+const { runExport, runHelp, runCheck} = require('../../sls-tools');
 
 const COMMANDS = {
   COMMAND_HELP: 'help',
-  COMMAND_EXPORT: 'export'
+  COMMAND_EXPORT: 'export',
+  COMMAND_CHECK: 'check'
 };
 
 const actions = {
@@ -18,6 +20,11 @@ const actions = {
     condition: () => handleCondition(cmdArguments.command === COMMANDS.COMMAND_EXPORT, cmdExportArguments),
     actionArguments: () => cmdExportArguments,
     action: async () => await runExport({...cmdArguments, ...cmdExportArguments})
+  },
+  runCheck: {
+    condition: () => handleCondition(cmdArguments.command === COMMANDS.COMMAND_CHECK, cmdCheckArguments),
+    actionArguments: () => cmdCheckArguments,
+    action: async () => await runCheck({...cmdArguments, ...cmdCheckArguments})
   }
 };
 

@@ -5,21 +5,21 @@ const resolveUuAppBaseUri = configuration => {
     return configuration;
 }
 
-const resolveCmdExportItemCommand = configuration => {
-    configuration.exports
-        .filter(exportItem => exportItem.exportType === "cmd")
-        .forEach(exportItem => {
-            exportItem.command = [_findSubAppConfiguration(configuration, exportItem)?.baseUri, exportItem.command].join("/");
-            return exportItem;
+const resolveCmdCommand = (configuration, type) => {
+    configuration[type]
+        .filter(item => item.exportType === "cmd" || type === "checks")
+        .forEach(item => {
+            item.uri = [_findSubAppConfiguration(configuration, item)?.baseUri, item.command].join("/");
+            return item;
         });
     return configuration;
 }
 
-const _findSubAppConfiguration = (configuration, exportItem) => {
-    return configuration.uuApp.subAppList.find(subApp => subApp.name === exportItem.uuApp);
+const _findSubAppConfiguration = (configuration, item) => {
+    return configuration.uuApp.subAppList.find(subApp => subApp.name === item.uuApp);
 }
 
 module.exports = {
     resolveUuAppBaseUri,
-    resolveCmdExportItemCommand
+    resolveCmdCommand
 }

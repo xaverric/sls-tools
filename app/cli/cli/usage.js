@@ -13,13 +13,14 @@ const usageDefinition = [
   {
     header: 'Commands',
     content: [
-      { name: 'help', summary: 'Display this help.' },
-      { name: 'export', summary: 'Downloads any configuration based on given parameters and configuration.' }
+      { name: 'export', summary: 'Downloads any configuration based on given parameters and configuration.' },
+      { name: 'check', summary: 'Downloads any configuration based on given parameters and configuration.' },
+      { name: 'help', summary: 'Checks the URL calls output againts predefined expected output.' }
     ]
   },
   {
     header: 'Parameters',
-    optionList: cmdArgumentsDefinition
+    optionList: cmdArgumentsDefinition,
   }
 ];
 

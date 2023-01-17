@@ -1,4 +1,4 @@
-const {escapeUu5StringArray} = require("../../helper/uu5string-escape-helper");
+const {escapeUu5StringArray} = require("../../../../../../bookkit/helper/uu5string-escape-helper");
 const template = (data, exportItem) => {
     return `<uu5string/>
             <UU5.Bricks.Lsi>

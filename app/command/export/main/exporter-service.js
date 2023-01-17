@@ -2,6 +2,8 @@ const {CONSOLE_LOG} = require("../../../logger/logger");
 const {handleCmdExport} = require("./cmd/cmd-data-exporter");
 const {fullExport} = require("./zip/zip-exporter");
 const {handleK8sExport} = require("./k8s/k8s-data-exporter");
+const {processVisualizations} = require("./bookkit/visualizations-service");
+const {processFullExportUpload} = require("./bookkit/full-export-upload-service");
 
 const EXPORTERS = [
     {
@@ -32,6 +34,8 @@ const exportData = async (cmdArgs, configuration) => {
     }
 
     cmdArgs.fullExport && fullExport(configuration);
+    cmdArgs.visualize && await processVisualizations(configuration)
+    cmdArgs.fullExport && cmdArgs.upload && await processFullExportUpload(configuration);
 }
 
 const exportWithRepeat = async (exportItem) => {

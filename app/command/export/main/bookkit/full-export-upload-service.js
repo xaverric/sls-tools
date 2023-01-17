@@ -1,4 +1,4 @@
-const {uploadFile, createSection} = require("./client/bookkit-client");
+const {uploadFile, createSection} = require("../../../../bookkit/client/bookkit-client");
 const createUu5String = require("./visualization/full-export-uu5string-builder");
 const fs = require("fs");
 

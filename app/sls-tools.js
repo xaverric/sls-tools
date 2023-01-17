@@ -1,9 +1,9 @@
 const {readConfiguration} = require("./configuration/configuration-reader");
-const {processVisualizations} = require("./bookkit/visualizations-service");
 const { exportData } = require("./command/export/main/exporter-service");
 const {CONSOLE_LOG} = require("./logger/logger");
-const {processFullExportUpload} = require("./bookkit/full-export-upload-service");
 const {exportCommandUsage} = require("./command/export/cli/usage");
+const {checkCommandUsage} = require("./command/check/cli/usage");
+const {checkData} = require("./command/check/main/check-service");
 
 /**
  * Run export command entry point
@@ -16,8 +16,19 @@ const runExport = async (cmdArgs) => {
 
     let configuration = await readConfiguration(cmdArgs);
     await exportData(cmdArgs, configuration);
-    cmdArgs.visualize && await processVisualizations(configuration)
-    cmdArgs.fullExport && cmdArgs.upload && await processFullExportUpload(configuration);
+}
+
+/**
+ * Run check command entry point
+ *
+ * @param cmdArgs
+ * @returns {Promise<void>}
+ */
+const runCheck = async (cmdArgs) => {
+    _isCommandOnly(cmdArgs) && CONSOLE_LOG.info(checkCommandUsage) && process.exit(0);
+
+    let configuration = await readConfiguration(cmdArgs);
+    await checkData(cmdArgs, configuration);
 }
 
 const runHelp = (usage) => {
@@ -30,5 +41,6 @@ const _isCommandOnly = (cmdArgs) => {
 
 module.exports = {
     runExport,
+    runCheck,
     runHelp
 }

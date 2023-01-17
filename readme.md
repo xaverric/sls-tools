@@ -19,6 +19,7 @@ sls-tools <command> <command parameters>
 ## Commands
 * help
 * [export](app/command/export/readme.md)
+* [check](app/command/check/readme.md)
 
 ## Parameters
 
@@ -70,8 +71,25 @@ module.exports = {
         "oidcHost": "...",
         "uri": "..."
     },
+    email: { // global email integration configuration, used by tool for notification purposes, email notification needs to be usually turned on by command line argument, i.e. --emailNotification
+      "transportsConfiguration": {
+        "auth": {
+          "pass": "password",
+          "user": "username"
+        },
+        "host": "email server address",
+        "port": 465,
+        "secure": true
+      },
+      "recipients": [
+        "recepient list email addresses"
+      ]
+    },
     exports: [ 
         // array of exports, see more details in the export command documentation
+    ],
+    checks: [
+        // array of checks, see more details in the check command documentation
     ]
 }
 ```
@@ -80,6 +98,10 @@ module.exports = {
 logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
+### 1.2.0
+* ```check``` command support for URL output verification
+* email notifications for check command
+
 ### 1.1.0
 * improved command line interface to be more structured, i.e. ```sls-tools export``` command will display help related to the export command only.
 * visualization export improvement - added support to visualize objects
@@ -87,9 +109,6 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 ## TODO
 - export
   - visualize k8s type as object
-- check
-  - similar to export, but can check the gathered output with predefined output
-  - can visualize OK status to the predefined bookkit page
 - call
   - same as export but only calls the URLs, does not store anything
   - support to load the dtoIn list file and execute the dtoIns against same command (replacement for uuCommander)

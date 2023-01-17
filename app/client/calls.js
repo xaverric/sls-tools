@@ -13,8 +13,12 @@ const {CONSOLE_LOG} = require("../logger/logger");
  */
 const callCommand = async (url, method, data, token = null, options = {}) => {
     CONSOLE_LOG.info(`Call command ${url}`);
-    const response = await axios(_prepareAxiosConfig(url, data, method, token, options));
-    return response.data;
+    try {
+        const response = await axios(_prepareAxiosConfig(url, data, method, token, options));
+        return response.data;
+    } catch (e) {
+        return e.response.data;
+    }
 };
 
 const _prepareAxiosConfig = (url, data, method, token = null, options = {}) => {

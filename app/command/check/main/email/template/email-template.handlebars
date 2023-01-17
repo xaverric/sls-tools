@@ -1,0 +1,62 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <style>
+        body {
+            font-family: 'Roboto', serif;;
+        }
+
+        .centerdiv {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #e1e0e5
+        }
+
+        th {
+            background-color: #aaaac0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="centerdiv">
+    {{#each results}}
+        <h3>{{@key}}</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>uuApp</th>
+                <th>command</th>
+                <th>validationStatus</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each this}}
+                <tr>
+                    <td>{{uuApp}}</td>
+                    <td>{{command}}</td>
+                    <td>{{validationStatus}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    {{/each}}
+</div>
+</body>
+</html>

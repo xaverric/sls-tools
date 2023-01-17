@@ -13,23 +13,23 @@ const resolveBookkitAuthorization = async configuration => {
     return configuration
 }
 
-const resolveCmdExportItemToken = configuration => {
-    configuration.exports
-        .filter(exportItem => exportItem.exportType === "cmd")
-        .forEach(exportItem => {
-            const oidcIdentity = _findSubAppConfiguration(configuration, exportItem)?.auth;
-            exportItem.token = configuration.uuApp.oidc[oidcIdentity].token;
-            return exportItem;
+const resolveCmdToken = (configuration, type) => {
+    configuration[type]
+        .filter(item => item.exportType === "cmd" || type === "checks")
+        .forEach(item => {
+            const oidcIdentity = _findSubAppConfiguration(configuration, item)?.auth;
+            item.token = configuration.uuApp.oidc[oidcIdentity].token;
+            return item;
         });
     return configuration;
 }
 
-const _findSubAppConfiguration = (configuration, exportItem) => {
-    return configuration.uuApp.subAppList.find(subApp => subApp.name === exportItem.uuApp);
+const _findSubAppConfiguration = (configuration, item) => {
+    return configuration.uuApp.subAppList.find(subApp => subApp.name === item.uuApp);
 }
 
 module.exports = {
     resolveUuAppAuthorization,
     resolveBookkitAuthorization,
-    resolveCmdExportItemToken
+    resolveCmdToken
 }
