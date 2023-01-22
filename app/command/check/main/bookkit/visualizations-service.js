@@ -1,4 +1,4 @@
-const createUu5String = require("./visualization/table-visualization-uu5string-builder");
+const createUu5String = require("./visualization/check-visualization-uu5string-builder");
 const {updateSection} = require("../../../../bookkit/client/bookkit-client");
 const {CONSOLE_LOG} = require("../../../../logger/logger");
 

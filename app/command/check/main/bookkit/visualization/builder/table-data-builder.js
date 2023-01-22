@@ -4,7 +4,7 @@ const ERROR_COLOR_SCHEME = {
 };
 
 const OK_COLOR_SCHEME = {
-    colorSchema: "green",
+    colorSchema: "blue",
     bgStyle: "filled"
 };
 
@@ -20,7 +20,7 @@ const build = (data) => {
 }
 
 const getTableColumns = () => {
-    return ["uuApp", "command", "checkGroup", "validationStatus", "errorMessage"]
+    return ["uuApp", "command", "checkGroup", "description", "validationStatus", "errorMessage"]
         .map(key => {
             return {header: key}
         });

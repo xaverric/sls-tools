@@ -66,6 +66,7 @@ const _getValidationResultWrapper = (checkItem, validationResult) => {
         uuApp: checkItem.uuApp,
         command: checkItem.command,
         checkGroup: checkItem.checkGroup,
+        description: checkItem.description,
         validationStatus: validationResult.validationStatus ? "OK" : "NOK",
         errorMessage: validationResult.errorMessage
     }

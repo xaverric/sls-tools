@@ -42,6 +42,7 @@ module.exports = {
             "dtoIn": {
                 // HTTP Request Body
             },
+            "description": "description for the check item", // displayed in the bookkit visualization
             "condition": {
                 "type": "equal|function",
                 "expextedDtoOut": Object, // mandatory for equal type, tool will do the deepEqual comparison with the provided dtoOut, optional for function type condition

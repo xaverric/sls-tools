@@ -98,6 +98,10 @@ module.exports = {
 logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
+### 1.3.0
+* ```check``` command visualization output extended to provide a dashboard overview of all successful and unsuccessful checks
+* added *description* attribute support for every individual check
+
 ### 1.2.0
 * ```check``` command support for URL output verification
 * email notifications for check command
