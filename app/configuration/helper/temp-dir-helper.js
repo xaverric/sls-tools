@@ -3,7 +3,7 @@ const {createDirectoryIfNotExist} = require("../../utils/fs-helper");
 const {currentDateWithTime} = require("../../utils/date-utils");
 
 const resolveTempDirForType = (configuration, type) => {
-    configuration[type].forEach(item => {
+    configuration[type]?.forEach(item => {
         item.tempDir = path.resolve(configuration.tempDir, item.exportType ? item.exportType : "", item.outDirectory ? item.outDirectory : "");
     });
 

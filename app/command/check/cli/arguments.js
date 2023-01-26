@@ -29,7 +29,7 @@ const cmdCheckArgumentsDefinition = [
         name: 'emailNotification',
         type: Boolean,
         description: 'Flag defining whether the output from checks should be sent via email.'
-    },
+    }
 ];
 
 const cmdCheckArguments = commandLineArgs(cmdCheckArgumentsDefinition, {stopAtFirstUnknown: true});

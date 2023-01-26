@@ -25,6 +25,9 @@ Show only checks which did not pass the validation.
 ### -v, --visualize
 Flag defining whether all checks should be visualized in the predefined bookkit page.
 
+### --emailNotification      
+Flag defining whether the output from checks should be sent via email.
+
 ## Configuration
 This configuration snippet below describes only the changes to the base configuration documented [here](../../../readme.md).
 ```js
