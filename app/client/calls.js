@@ -15,9 +15,9 @@ const callCommand = async (url, method, data, token = null, options = {}) => {
     CONSOLE_LOG.info(`Call command ${url}`);
     try {
         const response = await axios(_prepareAxiosConfig(url, data, method, token, options));
-        return response.data;
+        return response?.data;
     } catch (e) {
-        return e.response.data;
+        return e.response?.data;
     }
 };
 
@@ -29,7 +29,7 @@ const _prepareAxiosConfig = (url, data, method, token = null, options = {}) => {
             Accept: 'application/json',
             "Accept-Encoding": "gzip,deflate,compress"
         },
-        method: token ? method : 'POST',
+        method: method,
         data: JSON.stringify(data)
     };
     if (options?.binaryContent && options?.binaryContent === "binary") {

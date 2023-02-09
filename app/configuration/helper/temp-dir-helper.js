@@ -1,20 +1,27 @@
 const path = require("path");
 const {createDirectoryIfNotExist} = require("../../utils/fs-helper");
 const {currentDateWithTime} = require("../../utils/date-utils");
+const {processEnvironment} = require("./environment-processor");
 
-const resolveTempDirForType = (configuration, type) => {
-    configuration[type]?.forEach(item => {
-        item.tempDir = path.resolve(configuration.tempDir, item.exportType ? item.exportType : "", item.outDirectory ? item.outDirectory : "");
-    });
-
-    return configuration;
+const resolveTempDirForType = async (configuration, type) => {
+    return await processEnvironment(configuration, (environment) => resolveTempDirForTypeAndEnvironment(environment, type));
 }
 
-const resolveTempDir = (configuration) => {
-    configuration.tempDir = path.resolve(configuration.tempDir, `${currentDateWithTime()}`);
-    createDirectoryIfNotExist(configuration.tempDir);
+const resolveTempDirForTypeAndEnvironment = (environment, type) => {
+    environment[type]?.forEach(item => {
+        item.tempDir = path.resolve(environment.tempDir, item.exportType ? item.exportType : "", item.outDirectory ? item.outDirectory : "");
+    });
+    return environment;
+}
 
-    return configuration;
+const resolveTempDir = async (configuration) => {
+    return await processEnvironment(configuration, resolveTempDirForEnvironment);
+}
+
+const resolveTempDirForEnvironment = (environment) => {
+    environment.tempDir = path.resolve(environment.tempDir, `${currentDateWithTime()}`);
+    createDirectoryIfNotExist(environment.tempDir);
+    return environment;
 }
 
 module.exports = {

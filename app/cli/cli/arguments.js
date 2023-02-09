@@ -12,7 +12,13 @@ const cmdArgumentsDefinition = [
     alias: 'c',
     type: String,
     description: 'Configuration file path.'
-  }
+  },
+  {
+    name: 'environment',
+    alias: 'e',
+    type: String,
+    description: 'Specify the environment name for which the action should be performed. If not specified, all available environments are executed.'
+  },
 ];
 
 const cmdArguments = commandLineArgs(cmdArgumentsDefinition, { stopAtFirstUnknown: true });
