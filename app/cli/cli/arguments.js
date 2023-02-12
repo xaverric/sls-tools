@@ -16,9 +16,15 @@ const cmdArgumentsDefinition = [
   {
     name: 'environment',
     alias: 'e',
+    multiple: true,
     type: String,
     description: 'Specify the environment name for which the action should be performed. If not specified, all available environments are executed.'
   },
+  {
+    name: 'noprompt',
+    type: Boolean,
+    description: 'Disable prompt feature.'
+  }
 ];
 
 const cmdArguments = commandLineArgs(cmdArgumentsDefinition, { stopAtFirstUnknown: true });

@@ -1,4 +1,4 @@
-const template = (code) => {
+const template = (code, name) => {
     return `<uu5string/>
         <UU5.Bricks.Lsi>
             <UU5.Bricks.Lsi.Item language="en">
@@ -8,7 +8,7 @@ const template = (code) => {
                             <strong>Exported on:</strong> ${new Date()}
                         </UU5.Bricks.Div>
                         <UU5.Bricks.Div>
-                            <strong>Data:</strong> <UuContentKit.Links.FileLink src=\\"${code}\\"></UuContentKit.Links.FileLink>
+                            <strong>Data:</strong> <UuContentKit.Links.FileLink src=\\"${code}\\">${name}</UuContentKit.Links.FileLink>
                         </UU5.Bricks.Div>"
                     />
                 </UuContentKit.Bricks.BlockDefault>

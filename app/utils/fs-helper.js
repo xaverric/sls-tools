@@ -1,3 +1,4 @@
+const yaml = require('js-yaml');
 const fs = require ("fs");
 const path = require ("path");
 const {CONSOLE_LOG} = require("../logger/logger");
@@ -27,8 +28,8 @@ const getFilePath = (directory, fileName) => {
  */
 const storeFile = (directory, fileName, content) => {
     createDirectoryIfNotExist(directory);
-    fs.writeFileSync(getFilePath(directory, fileName), content);
-    CONSOLE_LOG.info(`File ${fileName} stored successfully into the "${directory}" location.`);
+    fs.writeFileSync(getFilePath(directory, fileName), content, "utf-8");
+    CONSOLE_LOG.info(`${getFilePath(directory, fileName)} created`);
 }
 
 const loadFile = async path => {
@@ -56,10 +57,26 @@ const loadJsonFile = filePath => {
     return data;
 };
 
+/**
+ * Reads config map from provided yaml file (config must be stored under data.SERVER_CFG key
+ *
+ * @param path
+ * @returns {any}
+ */
+const loadConfigMap = (filePath) => {
+    try {
+        const doc = yaml.load(fs.readFileSync(filePath));
+        return JSON.parse(doc.data.SERVER_CFG);
+    } catch (err) {
+        throw new Error(`Error occurred during loading file ${filePath}. Err: ${err}`);
+    }
+}
+
 module.exports = {
     storeFile,
     loadFile,
     loadJsonFile,
+    loadConfigMap,
     getFilePath,
     createDirectoryIfNotExist
 }

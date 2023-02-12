@@ -4,12 +4,14 @@ const {CONSOLE_LOG} = require("./logger/logger");
 const {exportCommandUsage} = require("./command/export/cli/usage");
 const {checkData} = require("./command/check/main/check-service");
 const {processEnvironment} = require("./configuration/helper/environment-processor");
+const {promptProceedAction} = require("./prompt/prompt-module");
 
 const _handleCmdOperation = async (cmdArgs, fnc) => {
     _isCommandOnly(cmdArgs) && CONSOLE_LOG.info(exportCommandUsage) && process.exit(0);
 
     let configuration = await readConfiguration(cmdArgs);
-    await processEnvironment(configuration, (environment) => fnc(cmdArgs, environment));
+    let proceed = cmdArgs.noprompt || await promptProceedAction(configuration, cmdArgs);
+    proceed && await processEnvironment(configuration, (environment) => fnc(cmdArgs, environment));
 }
 
 /**

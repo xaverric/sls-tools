@@ -1,11 +1,11 @@
 const path = require("path");
-const {loadJsonFile} = require("../../../../../../utils/fs-helper");
+const {loadJsonFile, loadConfigMap} = require("../../../../../../utils/fs-helper");
 
 const DEFAULT_ITEM_LIST_NAME = "itemList";
 
 const readDataForVisualization = async (exportItem) => {
     const filePath = path.join(exportItem.tempDir, exportItem.name);
-    const data = loadJsonFile(filePath);
+    const data = exportItem.exportType === "cmd" ? loadJsonFile(filePath) : loadConfigMap(filePath);
 
     if (exportItem.visualize.type === "object") {
         return data;

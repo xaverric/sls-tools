@@ -1,4 +1,5 @@
 const { callCommand, callFormPostCommand} = require("../../client/calls");
+const {CONSOLE_LOG} = require("../../logger/logger");
 
 /**
  * Updates given section on the given page with new uu5String content
@@ -18,6 +19,7 @@ const updateSection = async (baseUri, page, code, content, token) => {
         sys: { rev: lock.sys.rev }
     }, token);
     await callCommand(`${baseUri}/unlockPageSection`, "POST", { code: code, page: page }, token);
+    CONSOLE_LOG.info(`Visualization stored to ${baseUri}/book/page?code=${page}`);
 }
 
 /**

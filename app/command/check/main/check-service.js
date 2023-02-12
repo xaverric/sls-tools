@@ -28,6 +28,7 @@ const _decideValidator = (type) => {
 }
 
 const checkData = async (cmdArgs, configuration) => {
+    CONSOLE_LOG.info(`Processing check for environment: ${configuration.uuApp.name}`);
     let validationResults = [];
     for (const checkItem of _getFilteredChecks(cmdArgs, configuration)) {
         CONSOLE_LOG.info(`Running check for ${checkItem.uuApp}:${checkItem.command}.`);

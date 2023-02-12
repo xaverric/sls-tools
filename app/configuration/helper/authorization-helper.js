@@ -26,9 +26,9 @@ const resolveCmdToken = async (configuration, type) => {
 }
 
 const resolveCmdTokenForEnvironment = (environment, type) => {
-    environment[type]
-        .filter(item => item.exportType === "cmd" || type === "checks")
-        .forEach(item => {
+    environment?.[type]
+        ?.filter(item => item.exportType === "cmd" || type === "checks")
+        ?.forEach(item => {
             const oidcIdentity = _findSubAppConfiguration(environment, item)?.auth;
             item.token = environment.uuApp.oidc[oidcIdentity]?.token;
             return item;

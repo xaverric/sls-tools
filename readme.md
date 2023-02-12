@@ -40,6 +40,10 @@ Base configuration folder path containing *env.json* files with *contexts.json* 
 
 Specify the environment name for which the action should be performed. If not specified, all available environments are executed.
 
+### --noprompt boolean
+
+Disable prompt feature.
+
 ## Configuration
 
 Configuration is defined in the ```*.js``` file and can be structured to any need. Main ```*.js``` file must export a
@@ -116,10 +120,17 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
 
+### 1.4.1
+* prompt feature added for asking user before execution interactively in the command line whether it is allowed to proceed
+    * default behavior can be by-passed by the specifying the ```--noprompt``` parameter
+* option to visualize k8s export type - config map is converted from yaml into JSON format
+* config map is always stored to both ```yaml``` and ```json``` format
+
 ### 1.4.0
 * environment support added
   * to define multiple environments, simply export an array of invividual configuration objects with its own ```uuApp```, ```exports```, ```checks```, etc... definitions
   * single environmnet via single object export is still supported
+  
 ### 1.3.0
 
 * ```check``` command visualization output extended to provide a dashboard overview of all successful and unsuccessful
@@ -138,9 +149,6 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 * visualization export improvement - added support to visualize objects
 
 ## TODO
-
-- export
-    - visualize k8s type as object
 - call
     - same as export but only calls the URLs, does not store anything
     - support to load the dtoIn list file and execute the dtoIns against same command (replacement for uuCommander)
@@ -159,4 +167,3 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 - authorization
     - support oidc-plus4u-vault
     - store token for every uuApp individually into file system and reuse it if possible
-- prompt confirmation module - to confirm any action before execution, bypass the prompt feature by --noprompt flag

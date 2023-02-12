@@ -2,7 +2,7 @@ const {CONSOLE_LOG} = require("../../../logger/logger");
 const {handleCmdExport} = require("./cmd/cmd-data-exporter");
 const {fullExport} = require("./zip/zip-exporter");
 const {handleK8sExport} = require("./k8s/k8s-data-exporter");
-const {processVisualizations} = require("./bookkit/visualizations-service");
+const {processVisualization} = require("./bookkit/visualizations-service");
 const {processFullExportUpload} = require("./bookkit/full-export-upload-service");
 
 const EXPORTERS = [
@@ -25,16 +25,16 @@ const _decideExporter = (type) => {
 }
 
 const exportData = async (cmdArgs, configuration) => {
+    CONSOLE_LOG.info(`Processing export for environment: ${configuration.uuApp.name}`);
     for (const exportType of cmdArgs.exportType) {
         CONSOLE_LOG.info(`Exporting data using ${exportType} export type`);
         let filteredItems = configuration.exports.filter(item => item.exportType === exportType);
-        for (const exportItem of filteredItems) {
-            await exportWithRepeat(exportItem);
-        }
+
+        await processExportItems(filteredItems, exportWithRepeat);
+        cmdArgs.visualize && await processExportItems(filteredItems, (exportItem) => processVisualization(exportItem, configuration));
     }
 
     cmdArgs.fullExport && fullExport(configuration);
-    cmdArgs.visualize && await processVisualizations(configuration)
     cmdArgs.fullExport && cmdArgs.upload && await processFullExportUpload(configuration);
 }
 
@@ -47,6 +47,12 @@ const exportWithRepeat = async (exportItem) => {
         } catch (e) {
             CONSOLE_LOG.error(e);
         }
+    }
+}
+
+const processExportItems = async (exportItems, fnc) => {
+    for (const exportItem of exportItems) {
+        await fnc(exportItem);
     }
 }
 

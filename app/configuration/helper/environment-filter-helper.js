@@ -1,7 +1,7 @@
 const resolveEnvironment = (configuration, cmdArgs) => {
     configuration = convertFromObjectConfig(configuration);
     if (cmdArgs.environment) {
-        configuration = configuration.filter(environment => cmdArgs.environment === environment.uuApp.shortName)
+        configuration = configuration.filter(environment => cmdArgs.environment.includes(environment.uuApp.shortName))
     }
     return configuration;
 }

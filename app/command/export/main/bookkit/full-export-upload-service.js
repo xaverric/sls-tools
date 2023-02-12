@@ -5,7 +5,7 @@ const fs = require("fs");
 const processFullExportUpload = async (configuration) => {
     const zipContent = fs.createReadStream(configuration.bookkit.fullExportFilePath);
     const response = await uploadFile(configuration.bookkit.uri, zipContent, configuration.bookkit.token)
-    const uu5stringContent = createUu5String(response.code);
+    const uu5stringContent = createUu5String(response.code, configuration.uuApp.name);
     await createSection(configuration.bookkit.uri, configuration.bookkit.fullExport, uu5stringContent, configuration.bookkit.token);
 }
 

@@ -25,7 +25,7 @@ const options = {
         maxFiles: 5
     },
     console: {
-        level: 'debug',
+        level: 'info',
         format: customConsoleFormat,
         handleExceptions: true,
         colorize: true

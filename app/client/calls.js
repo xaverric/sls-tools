@@ -12,7 +12,7 @@ const {CONSOLE_LOG} = require("../logger/logger");
  * @returns {Promise<any>}
  */
 const callCommand = async (url, method, data, token = null, options = {}) => {
-    CONSOLE_LOG.info(`Call command ${url}`);
+    CONSOLE_LOG.debug(`Call command ${url}`);
     try {
         const response = await axios(_prepareAxiosConfig(url, data, method, token, options));
         return response?.data;

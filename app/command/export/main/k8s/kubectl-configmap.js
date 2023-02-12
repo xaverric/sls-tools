@@ -2,7 +2,7 @@ const {callCliCommand} = require("../../../../cli/cmd-exec-module.js");
 const {CONSOLE_LOG} = require("../../../../logger/logger");
 
 const getConfigMap = async exportItem => {
-    CONSOLE_LOG.info(`Searching for ${exportItem.uuApp} configmap in ${exportItem.context}/${exportItem.namespace}`)
+    CONSOLE_LOG.debug(`Searching for ${exportItem.uuApp} configmap in ${exportItem.context}/${exportItem.namespace}`)
     await callCliCommand(`kubectl config use-context ${exportItem.context}`);
     let configMaps = await callCliCommand(`kubectl get configmaps -n ${exportItem.namespace} -o jsonpath='{.items[*]}'`);
     let configMapName = getArrayFromLineContent(configMaps)
