@@ -126,7 +126,7 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
 
-### 1.5.0-RC1
+### 1.5.0-RC1 & 1.5.0-RC2
 Optimized error handling
 
 ### 1.5.0-RC

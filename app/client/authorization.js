@@ -9,8 +9,8 @@ const login = async (oidcHost, accessCode1, accessCode2) => {
         scope: 'openid https:// http://localhost'
     };
     const response = await callCommand(oidcHost, "POST", credentials);
-    if (!response.id_token) {
-        CONSOLE_LOG.error(JSON.stringify(response, null, 4));
+    if (!response || !response?.id_token) {
+        CONSOLE_LOG.info(JSON.stringify(response, null, 4));
     }
     return response.id_token;
 };
