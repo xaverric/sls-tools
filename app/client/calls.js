@@ -17,6 +17,7 @@ const callCommand = async (url, method, data, token = null, options = {}) => {
         const response = await axios(_prepareAxiosConfig(url, data, method, token, options));
         return response?.data;
     } catch (e) {
+        CONSOLE_LOG.error(e);
         return e.response?.data;
     }
 };
