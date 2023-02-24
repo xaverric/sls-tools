@@ -1,9 +1,10 @@
 const commandLineUsage = require('command-line-usage');
 const { cmdArgumentsDefinition } = require('./arguments.js');
+const packageJson = require("./../../../package.json")
 
 const usageDefinition = [
   {
-    header: 'sls-tools',
+    header: `sls-tools @${packageJson.version}`,
     content: "Your daily helper tool you didn't know you needed"
   },
   {

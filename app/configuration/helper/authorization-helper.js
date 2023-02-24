@@ -17,7 +17,9 @@ const resolveBookkitAuthorization = async configuration => {
 }
 
 const resolveBookkitAuthorizationForEnvironment = async environment => {
-    environment.bookkit.token = await login(environment.bookkit.oidcHost, environment.bookkit.accessCode1, environment.bookkit.accessCode2);
+    if (environment.bookkit) {
+        environment.bookkit.token = await login(environment.bookkit.oidcHost, environment.bookkit.accessCode1, environment.bookkit.accessCode2);
+    }
     return environment
 }
 

@@ -1,4 +1,4 @@
-const {compile} = require("../../../../../handlebars/handlebars-template-helper");
+const {compile} = require("../../../../../utils/handlebars/handlebars-template-helper");
 const path = require("path");
 
 const HTML_TEMPLATE_PATH = path.join(__dirname, "email-template.handlebars");

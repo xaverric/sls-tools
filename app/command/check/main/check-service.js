@@ -5,6 +5,7 @@ const {CONSOLE_LOG} = require("../../../logger/logger");
 const {printConsoleOutput} = require("./console/console-printer-service");
 const {processVisualizations} = require("./bookkit/visualizations-service");
 const {sendEmailNotification} = require("./email/email-notification-module");
+const {groupBy} = require("../../../utils/group-by");
 
 const CHECK_GROUP_ATTR = "checkGroup";
 
@@ -41,7 +42,7 @@ const checkData = async (cmdArgs, configuration) => {
         validationResults = validationResults.filter(item => item.validationStatus === "NOK");
     }
 
-    const groupedResults = _groupBy(validationResults, CHECK_GROUP_ATTR);
+    const groupedResults = groupBy(validationResults, CHECK_GROUP_ATTR);
 
     cmdArgs.consoleOutput && printConsoleOutput(cmdArgs, groupedResults);
     cmdArgs.visualize && await processVisualizations(cmdArgs, configuration, groupedResults);
@@ -52,14 +53,6 @@ const _getFilteredChecks = (cmdArgs, configuration) => {
     return cmdArgs.checkGroup ?
         configuration.checks.filter(item => cmdArgs.checkGroup?.includes(item?.checkGroup)) :
         configuration.checks;
-}
-
-const _groupBy = (array, key) => {
-    return array.reduce((acc, item) => {
-        acc[item[key]] = acc[item[key]] || [];
-        acc[item[key]].push(item);
-        return acc;
-    }, {});
 }
 
 const _getValidationResultWrapper = (checkItem, validationResult) => {

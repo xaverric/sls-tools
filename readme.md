@@ -25,6 +25,7 @@ sls-tools <command> <command parameters>
 * help
 * [export](app/command/export/readme.md)
 * [check](app/command/check/readme.md)
+* [dependency-manager](app/command/dependency-manager/readme.md)
 
 ## Parameters
 
@@ -55,6 +56,11 @@ configuration object. The structure of the object and mandatory fields is descri
 module.exports = [
     {
         tempDir: "...", // local folder path for temorary data storage
+        git: {
+            uri: "...", // git base URI (final uri is concatenated from git.uri + uuApp.gitName
+            branch: "...", // active branch name
+            tempDir: "..." // temp dir for git clone command, if not defined, default tempDir value is used instead git.tempDir
+        },
         uuApp: {
             name: "...", // name of the uuApp
             shortName: "...", //short name value identificator, used for environment filtering
@@ -120,6 +126,13 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
 
+### 1.5.0-RC
+First iteration which is not covering whole implementation set, specifically lock feature.
+
+* Added [dependency-manager](app/command/dependency-manager/readme.md) feature allowing user to analyze or lock dependencies. Analysis can be also visualized into the CSV or bookkit page.
+* Added git support to clone, fetch, pull, checkout specific GIT repository and branch for any uuApp based on the configuration definition.
+* Optimized configuration loader module to not load unnecessary configuration for the executed command
+
 ### 1.4.1
 * prompt feature added for asking user before execution interactively in the command line whether it is allowed to proceed
     * default behavior can be by-passed by the specifying the ```--noprompt``` parameter
@@ -133,13 +146,13 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
   
 ### 1.3.0
 
-* ```check``` command visualization output extended to provide a dashboard overview of all successful and unsuccessful
+* [check](app/command/check/readme.md) command visualization output extended to provide a dashboard overview of all successful and unsuccessful
   checks
 * added *description* attribute support for every individual check
 
 ### 1.2.0
 
-* ```check``` command support for URL output verification
+* [check](app/command/check/readme.md) command support for URL output verification
 * email notifications for check command
 
 ### 1.1.0
@@ -161,9 +174,6 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
         - define exact URL to call plus dtoIn
 - compare
     - suitable for fullExport comparison
-- dependency-manager
-    - checkout the GIT folders to specific path for every subApp in subAppList
-    - produce dependency list for the project
 - authorization
     - support oidc-plus4u-vault
     - store token for every uuApp individually into file system and reuse it if possible
