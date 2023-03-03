@@ -1,10 +1,10 @@
 {
   "name": "sls-tools",
-  "version": "1.5.0-RC2",
+  "version": "1.5.0-RC3",
   "description": "Your daily helper tool you didn't know you needed",
   "main": "cli.js",
   "scripts": {},
-  "author": "Daniel Jílek & Zdeněk Tejnecký",
+  "author": "Daniel Jílek",
   "license": "ISC",
   "dependencies": {
     "adm-zip": "^0.5.9",

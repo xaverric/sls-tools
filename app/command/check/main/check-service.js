@@ -46,7 +46,7 @@ const checkData = async (cmdArgs, configuration) => {
 
     cmdArgs.consoleOutput && printConsoleOutput(cmdArgs, groupedResults);
     cmdArgs.visualize && await processVisualizations(cmdArgs, configuration, groupedResults);
-    cmdArgs.emailNotification && await sendEmailNotification(cmdArgs, configuration, groupedResults);
+    cmdArgs.emailNotification && !_isEmptyResult(groupedResults) && await sendEmailNotification(cmdArgs, configuration, groupedResults);
 }
 
 const _getFilteredChecks = (cmdArgs, configuration) => {
@@ -64,6 +64,10 @@ const _getValidationResultWrapper = (checkItem, validationResult) => {
         validationStatus: validationResult.validationStatus ? "OK" : "NOK",
         errorMessage: validationResult.errorMessage
     }
+}
+
+const _isEmptyResult = result => {
+    return !result || Object.keys(result).length === 0
 }
 
 module.exports = {
