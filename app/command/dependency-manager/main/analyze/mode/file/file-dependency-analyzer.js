@@ -5,7 +5,7 @@ const {groupBy} = require("../../../../../../utils/group-by");
 const {visualize} = require("../../visualize/analyze-visualization-service");
 
 const handleFileAnalysis = async (cmdArgs) => {
-    const packageLockJson = loadJsonFile(path.resolve(cmdArgs.path, "package-lock.json"));
+    const packageLockJson = loadJsonFile(path.resolve(cmdArgs.path || cmdArgs.packageLockJsonPath, "package-lock.json"));
     let dependencies = scanDependencies(packageLockJson);
     let uniqueDependencyList = getUniqueDependencyList(dependencies);
     let analysisResult = groupBy(uniqueDependencyList, "name");

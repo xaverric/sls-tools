@@ -28,6 +28,16 @@ const cmdDependencyManagerArgumentsDefinition = [
         description: 'Path to the directory with package.json and package-lock.json located inside. Applicable for file mode for both analyze and lock attribute.'
     },
     {
+        name: 'packageJsonPath',
+        type: String,
+        description: 'Path to the package.json file. Applicable for file mode for both analyze and lock attribute. This option will get handy when using the sls-tools as a project dependency.'
+    },
+    {
+        name: 'packageLockJsonPath',
+        type: String,
+        description: 'Path to the package-lock.json file. Applicable for file mode for both analyze and lock attribute. This option will get handy when using the sls-tools as a project dependency.'
+    },
+    {
         name: 'visualize',
         alias: 'v',
         multiple: true,

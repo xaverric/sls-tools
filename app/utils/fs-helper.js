@@ -50,7 +50,7 @@ const loadFile = async path => {
 const loadJsonFile = filePath => {
     let data;
     try {
-        data = JSON.parse(fs.readFileSync(filePath));
+        data = JSON.parse(fs.readFileSync(path.resolve(filePath)));
     } catch (err) {
         throw new Error(`Error occurred during loading file ${filePath}. Err: ${err}`);
     }
@@ -60,7 +60,7 @@ const loadJsonFile = filePath => {
 /**
  * Reads config map from provided yaml file (config must be stored under data.SERVER_CFG key
  *
- * @param path
+ * @param filePath
  * @returns {any}
  */
 const loadConfigMap = (filePath) => {

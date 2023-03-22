@@ -19,7 +19,8 @@ const resolveTempDir = async (configuration) => {
 }
 
 const resolveTempDirForEnvironment = (environment) => {
-    environment.tempDir = path.resolve(environment.tempDir, `${currentDateWithTime()}`);
+    const tempDir = environment.tempDir || "sls-tools-temp";
+    environment.tempDir = path.resolve(tempDir, `${currentDateWithTime()}`);
     createDirectoryIfNotExist(environment.tempDir);
     return environment;
 }
