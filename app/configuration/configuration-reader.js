@@ -9,6 +9,8 @@ const {resolveEnvironment} = require("./helper/environment-filter-helper");
 const {resolveGitConfiguration} = require("./helper/git-config-helper");
 const {CONSOLE_LOG} = require("../logger/logger");
 
+const EMPTY_CONFIG = [{}];
+
 const CONFIG_DEFAULT_PATH = path.join(os.homedir(), '.sls-tools', 'config.js');
 
 const EXPORTS_ITEM_TYPE = "exports";
@@ -44,7 +46,7 @@ const COMMAND_TO_CONFIG_MAPPING = {
 const readConfiguration = async cmdArgs => {
     if (cmdArgs.noconfig) {
         CONSOLE_LOG.info("Execution without config file requested. Proceeding...");
-        return;
+        return EMPTY_CONFIG;
     }
 
     let configuration;

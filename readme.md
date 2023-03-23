@@ -45,6 +45,11 @@ Specify the environment name for which the action should be performed. If not sp
 
 Disable prompt feature.
 
+### --noconfig boolean
+
+Flag defining whether the config should be loaded. Default value is set to false. This option might get handy when it is required to provide all parameters via CLI only (i.e. when sls-tools is used as a project dependency)
+
+
 ## Configuration
 
 Configuration is defined in the ```*.js``` file and can be structured to any need. Main ```*.js``` file must export a
@@ -125,6 +130,10 @@ module.exports = [
 logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
+
+### 1.5.0-RC3 - 1.5.0-RC5
+* Added support for tool execution without configuration using ```--noconfig``` parameter. This option is mainly supported for the [dependency-manager](app/command/dependency-manager/readme.md) task - mandatory parameters must be however provided via CLI (i.e. path to the package.json/package-lock.json)
+* Added [dependency-manager](app/command/dependency-manager/readme.md) lock feature.
 
 ### 1.5.0-RC1 & 1.5.0-RC2
 Optimized error handling

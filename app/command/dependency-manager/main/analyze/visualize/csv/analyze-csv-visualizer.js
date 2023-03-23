@@ -19,7 +19,7 @@ const storeDependencyAnalysis = (cmdArgs, projectPath, csv) => {
 }
 
 const decidePath = (cmdArgs, projectPath) => {
-    return cmdArgs.mode === "file" ? path.resolve(cmdArgs.path, "dependency-analysis.csv") : path.resolve(projectPath, "dependency-analysis.csv");
+    return cmdArgs.mode === "file" ? path.resolve(cmdArgs.path || cmdArgs.packageLockJsonPath, "dependency-analysis.csv") : path.resolve(projectPath, "dependency-analysis.csv");
 }
 
 module.exports = {
