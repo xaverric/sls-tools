@@ -72,13 +72,13 @@ module.exports = [
             host: "...", // host uri of the uuApp
             oidcHost: "...", // oidc host uri (grantToken) for obtaining the authorization token
             oidc: { // oidc credentials object
-                "userName1": {
+                "userName1": { // example with direct definition of access codes
                     accessCode1: "...",
                     accessCode2: "..."
                 },
-                "userName2": {
-                    accessCode1: "...",
-                    accessCode2: "..."
+                "userName2": { // example with loading the credentials from the vault - user will be prompted shortly after the execution to insert the master password to the secure store, all other credentials will be loaded from it automatically based on the uid defined
+                    uid: "10-10-1-1",
+                    strategy: "vault"
                 }
             },
             subAppList: [ // list of subApps for the given uuApp
@@ -96,6 +96,10 @@ module.exports = [
             "configNamePostfix": "-application-config" // used for exports to search for config maps including only this value in its name
         },
         bookkit: {
+            // you can either define the vault strategy with user uid
+            uid: "10-10-1-1",
+            strategy: "vault",
+            // or you can defined the access codes directly
             "accessCode1": "...",
             "accessCode2": "...",
             "oidcHost": "...",
@@ -130,6 +134,10 @@ module.exports = [
 logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
+
+### 1.5.1 
+* Secure store generated using [oidc-plus4u-vault](https://www.npmjs.com/package/oidc-plus4u-vault) supported. Access codes to any user identities does not have to be defined right in the configuration but can be loaded from the protected secure store.
+* It is only supported the load of secure store from default location which is **$HOME/.oidc-plus4u-vault/vault.data**
 
 ### 1.5.0-RC3 - 1.5.0-RC5
 * Added support for tool execution without configuration using ```--noconfig``` parameter. This option is mainly supported for the [dependency-manager](app/command/dependency-manager/readme.md) task - mandatory parameters must be however provided via CLI (i.e. path to the package.json/package-lock.json)

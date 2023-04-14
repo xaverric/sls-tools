@@ -11,6 +11,18 @@ const promptProceedAction = async (configuration, cmdArgs) => {
     return answer.filter;
 }
 
+const promptSecret = async () =>{
+    const answer = await inquirer.prompt([
+        {
+            type: "password",
+            name: "secret",
+            message: `Secure store password (default): `
+        }
+    ]);
+    return answer.secret;
+}
+
 module.exports = {
-    promptProceedAction
+    promptProceedAction,
+    promptSecret
 }
