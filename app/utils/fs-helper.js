@@ -32,6 +32,12 @@ const storeFile = (directory, fileName, content) => {
     CONSOLE_LOG.info(`${getFilePath(directory, fileName)} created`);
 }
 
+const storeBinaryFile = (directory, fileName, content) => {
+    createDirectoryIfNotExist(directory);
+    fs.writeFileSync(getFilePath(directory, fileName), content);
+    CONSOLE_LOG.info(`${getFilePath(directory, fileName)} created`);
+}
+
 const loadFile = async path => {
     let file = require(path);
     if (typeof file === "function") {
@@ -57,6 +63,16 @@ const loadJsonFile = filePath => {
     return data;
 };
 
+const readTextFile = filePath => {
+    let data;
+    try {
+        data = fs.readFileSync(path.resolve(filePath), "utf-8");
+    } catch (err) {
+        throw new Error(`Error occurred during loading file ${filePath}. Err: ${err}`);
+    }
+    return data;
+}
+
 /**
  * Reads config map from provided yaml file (config must be stored under data.SERVER_CFG key
  *
@@ -74,9 +90,11 @@ const loadConfigMap = (filePath) => {
 
 module.exports = {
     storeFile,
+    storeBinaryFile,
     loadFile,
     loadJsonFile,
     loadConfigMap,
     getFilePath,
-    createDirectoryIfNotExist
+    createDirectoryIfNotExist,
+    readTextFile
 }

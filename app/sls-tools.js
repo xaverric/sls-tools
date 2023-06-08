@@ -8,6 +8,8 @@ const {promptProceedAction} = require("./utils/prompt/prompt-module");
 const {dependencyManagerCommandUsage} = require("./command/dependency-manager/cli/usage");
 const {checkCommandUsage} = require("./command/check/cli/usage");
 const {exportCommandUsage} = require("./command/export/cli/usage");
+const {compareCommandUsage} = require("./command/compare/cli/usage");
+const {compare} = require("./command/compare/main/compare-service");
 
 const _handleCmdOperation = async (cmdArgs, commandUsage, fnc) => {
     _isCommandOnly(cmdArgs) && CONSOLE_LOG.info(commandUsage) && process.exit(0);
@@ -47,6 +49,16 @@ const runDependencyManager = async (cmdArgs) => {
     await _handleCmdOperation(cmdArgs, dependencyManagerCommandUsage, dependencyManager);
 }
 
+/**
+ * Run compare command entry point
+ *
+ * @param cmdArgs
+ * @returns {Promise<void>}
+ */
+const runCompare = async (cmdArgs) => {
+    await _handleCmdOperation(cmdArgs, compareCommandUsage, compare);
+}
+
 const runHelp = (usage) => {
     CONSOLE_LOG.info(usage);
 }
@@ -59,5 +71,6 @@ module.exports = {
     runExport,
     runCheck,
     runDependencyManager,
-    runHelp
+    runHelp,
+    runCompare
 }

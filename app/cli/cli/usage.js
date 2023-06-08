@@ -14,8 +14,10 @@ const usageDefinition = [
   {
     header: 'Commands',
     content: [
-      { name: 'export', summary: 'Downloads any configuration based on given parameters and configuration.' },
-      { name: 'check', summary: 'Downloads any configuration based on given parameters and configuration.' },
+      { name: 'export', summary: 'Downloads any configuration and data based on given parameters and configuration.' },
+      { name: 'check', summary: 'Checks any configuration based on given parameters and configuration.' },
+      { name: 'dependency-manager', summary: 'Allows to analyze and lock project dependencies on other libraries and components.' },
+      { name: 'compare', summary: 'Allows the user to perform comparison of the exported data.' },
       { name: 'help', summary: 'Checks the URL calls output againts predefined expected output.' }
     ]
   },

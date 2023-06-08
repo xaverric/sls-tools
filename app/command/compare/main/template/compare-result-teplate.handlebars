@@ -1,0 +1,122 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <style>
+        * {
+            font-family: 'Roboto', serif;;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        h1, h2, h3 {
+            margin: 1em 0 0 0;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 0 0 1em 0;
+        }
+
+        section {
+            margin-top: 1em;
+        }
+
+        #container {
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        #accordion input {
+            display: none;
+        }
+
+        #accordion label {
+            border-radius: .25em;
+            cursor: pointer;
+            display: block;
+            margin-bottom: .125em;
+            padding: .25em 1em;
+            z-index: 20;
+        }
+
+        #accordion input:checked + label {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            margin-bottom: 0;
+        }
+
+        #accordion article {
+            background: #f7f7f7;
+            height: 0px;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        #accordion article pre {
+            padding: 1em;
+        }
+
+        #accordion input:checked article {
+        }
+
+        #accordion input:checked ~ article {
+            border-bottom-left-radius: .25em;
+            border-bottom-right-radius: .25em;
+            height: auto;
+            margin-bottom: .125em;
+        }
+
+        .green, pre span.plus {
+            background-color: #cbffcb;
+        }
+
+        .red, pre span.minus {
+            background-color: #ffd2e1;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <header>
+        <h1>Comparison</h1>
+        <h3>Left:  "{{leftName}}"</h3>
+        <h3>Right: "{{rightName}}"</h3>
+    </header>
+    {{#if uniqueOnLeftSide}}
+        <section>
+            <h3>Unique on Left</h3>
+            {{#each uniqueOnLeftSide}}
+                {{this}}
+            {{/each}}
+        </section>
+    {{/if}}
+    {{#if uniqueOnRightSide}}
+        <section>
+            <h3>Unique on Right</h3>
+            {{#each uniqueOnRightSide}}
+                {{this}}
+            {{/each}}
+        </section>
+    {{/if}}
+    <section id="accordion">
+        {{#each comparisonResult}}
+            <div>
+                <input type="checkbox" id="check-{{@index}}"/>
+                {{#if diff}}
+                    <label for="check-{{@index}}" class="red">{{name}}</label>
+                {{else}}
+                    <label for="check-{{@index}}" class="green">{{name}}</label>
+                {{/if}}
+                <article>
+                    <pre>{{diff}}</pre>
+                </article>
+            </div>
+        {{/each}}
+    </section>
+</div>
+</body>
+</html>

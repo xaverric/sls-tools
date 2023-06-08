@@ -5,7 +5,7 @@ const packageJson = require("./../../../../package.json");
 const usageDefinition = [
   {
     header: `dependency-manager (sls-tools @${packageJson.version})`,
-    content: "Allows to analyze amd lock project dependencies on other libraries and components."
+    content: "Allows to analyze and lock project dependencies on other libraries and components."
   },
   {
     header: 'Synopsis',

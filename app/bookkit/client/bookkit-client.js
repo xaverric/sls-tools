@@ -1,4 +1,4 @@
-const { callCommand, callFormPostCommand} = require("../../client/calls");
+const {callCommand, callFormPostCommand} = require("../../client/calls");
 const {CONSOLE_LOG} = require("../../logger/logger");
 
 /**
@@ -11,14 +11,14 @@ const {CONSOLE_LOG} = require("../../logger/logger");
  * @param token authorization token
  */
 const updateSection = async (baseUri, page, code, content, token) => {
-    let lock = await callCommand(`${baseUri}/lockPageSection`, "POST", { code: code, page: page }, token);
+    let lock = await callCommand(`${baseUri}/lockPageSection`, "POST", {code: code, page: page}, token);
     await callCommand(`${baseUri}/updatePageSection`, "POST", {
         code: code,
         page: page,
         content: content,
-        sys: { rev: lock.sys.rev }
+        sys: {rev: lock.sys.rev}
     }, token);
-    await callCommand(`${baseUri}/unlockPageSection`, "POST", { code: code, page: page }, token);
+    await callCommand(`${baseUri}/unlockPageSection`, "POST", {code: code, page: page}, token);
     CONSOLE_LOG.info(`Visualization stored to ${baseUri}/book/page?code=${page}`);
 }
 
@@ -43,9 +43,18 @@ const uploadFile = async (baseUri, data, token) => {
     return await callFormPostCommand(`${baseUri}/createBinary`, data, token);
 }
 
+const listBinaries = async (baseUri, data, token) => {
+    return await callCommand(`${baseUri}/listBinaries`, "GET", data, token);
+}
+
+const getBinaryData = async (baseUri, code, token) => {
+    return await callCommand(`${baseUri}/getBinaryData?code=${code}`, "GET", {}, token, {binaryContent: "binary"});
+}
+
 module.exports = {
     updateSection,
     createSection,
-    uploadFile
-
+    uploadFile,
+    listBinaries,
+    getBinaryData
 }

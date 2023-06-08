@@ -26,6 +26,7 @@ sls-tools <command> <command parameters>
 * [export](app/command/export/readme.md)
 * [check](app/command/check/readme.md)
 * [dependency-manager](app/command/dependency-manager/readme.md)
+* [compare](app/command/compare/readme.md)
 
 ## Parameters
 
@@ -124,7 +125,10 @@ module.exports = [
         ],
         checks: [
             // array of checks, see more details in the check command documentation
-        ]
+        ],
+        compare: {
+            // confuguration object for comparison task, see more details in the compare command documentation
+        }
     }
 ]
 ```
@@ -134,6 +138,9 @@ module.exports = [
 logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
+
+### 1.6.0
+* Added support for [compare](app/command/compare/readme.md) feature. Tool can now compare two exports and produce the comparison output. Exports for comparison can be provided directly fro mthe file system, or it can automatically download the two latest comparisons for given environment from the bookkit. Comparison report can be filtered to contain differences only and also can send an email notification about the changes in the configuration. 
 
 ### 1.5.1 
 * Secure store generated using [oidc-plus4u-vault](https://www.npmjs.com/package/oidc-plus4u-vault) supported. Access codes to any user identities does not have to be defined right in the configuration but can be loaded from the protected secure store.

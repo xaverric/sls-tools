@@ -40,6 +40,9 @@ const COMMAND_TO_CONFIG_MAPPING = {
         configLoad: [
             resolveGitConfiguration
         ]
+    },
+    compare: {
+        configLoad: []
     }
 }
 
