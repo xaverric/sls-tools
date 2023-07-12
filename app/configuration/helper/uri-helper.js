@@ -17,7 +17,7 @@ const resolveCmdCommand = async (configuration, type) => {
 
 const resolveCmdCommandForEnvironment = (configuration, type) => {
     configuration?.[type]
-        ?.filter(item => item.exportType === "cmd" || type === "checks")
+        ?.filter(item => item.exportType === "cmd" || type === "checks" || type === "credentials-manager")
         ?.forEach(item => {
             item.uri = [
                 _findSubAppConfiguration(configuration, item)?.baseUri,

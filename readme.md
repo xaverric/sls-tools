@@ -26,6 +26,7 @@ sls-tools <command> <command parameters>
 * [export](app/command/export/readme.md)
 * [check](app/command/check/readme.md)
 * [dependency-manager](app/command/dependency-manager/readme.md)
+* [credentials-manager](app/command/credentials-manager/readme.md)
 * [compare](app/command/compare/readme.md)
 
 ## Parameters
@@ -128,7 +129,10 @@ module.exports = [
         ],
         compare: {
             // confuguration object for comparison task, see more details in the compare command documentation
-        }
+        },
+        "credentials-manager": [
+            // array of registration commands, see more details in the credentials-manager command documentation
+        ]
     }
 ]
 ```
@@ -138,6 +142,9 @@ module.exports = [
 logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
+
+### 1.7.0
+* Added support for easy user registration via command line interface. 
 
 ### 1.6.0
 * Added support for [compare](app/command/compare/readme.md) feature. Tool can now compare two exports and produce the comparison output. Exports for comparison can be provided directly fro mthe file system, or it can automatically download the two latest comparisons for given environment from the bookkit. Comparison report can be filtered to contain differences only and also can send an email notification about the changes in the configuration. 

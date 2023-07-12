@@ -15,6 +15,7 @@ const CONFIG_DEFAULT_PATH = path.join(os.homedir(), '.sls-tools', 'config.js');
 
 const EXPORTS_ITEM_TYPE = "exports";
 const CHECKS_ITEM_TYPE = "checks";
+const CREDENTIALS_MANAGER_ITEM_TYPE = "credentials-manager";
 
 const COMMAND_TO_CONFIG_MAPPING = {
     export: {
@@ -39,6 +40,14 @@ const COMMAND_TO_CONFIG_MAPPING = {
     "dependency-manager": {
         configLoad: [
             resolveGitConfiguration
+        ]
+    },
+    "credentials-manager": {
+        configLoad: [
+            resolveUuAppAuthorization,
+            resolveUuAppBaseUri,
+            (configuration) => resolveCmdCommand(configuration, CREDENTIALS_MANAGER_ITEM_TYPE),
+            (configuration) => resolveCmdToken(configuration, CREDENTIALS_MANAGER_ITEM_TYPE)
         ]
     },
     compare: {

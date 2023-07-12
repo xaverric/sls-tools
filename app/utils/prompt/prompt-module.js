@@ -22,7 +22,24 @@ const promptSecret = async () =>{
     return answer.secret;
 }
 
+const promptAccessCodes = async () =>{
+    const answer = await inquirer.prompt([
+        {
+            type: "password",
+            name: "accessCode1",
+            message: `Access Code 1: `
+        },
+        {
+            type: "password",
+            name: "accessCode2",
+            message: `Access Code 2: `
+        }
+    ]);
+    return answer;
+}
+
 module.exports = {
     promptProceedAction,
-    promptSecret
+    promptSecret,
+    promptAccessCodes
 }

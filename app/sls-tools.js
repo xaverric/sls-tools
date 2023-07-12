@@ -3,6 +3,7 @@ const { exportData } = require("./command/export/main/exporter-service");
 const {CONSOLE_LOG} = require("./logger/logger");
 const {checkData} = require("./command/check/main/check-service");
 const {dependencyManager} = require("./command/dependency-manager/main/dependeny-manager-service");
+const {credentialsManager} = require("./command/credentials-manager/main/credentials-manager-service");
 const {processEnvironment} = require("./configuration/helper/environment-processor");
 const {promptProceedAction} = require("./utils/prompt/prompt-module");
 const {dependencyManagerCommandUsage} = require("./command/dependency-manager/cli/usage");
@@ -10,6 +11,7 @@ const {checkCommandUsage} = require("./command/check/cli/usage");
 const {exportCommandUsage} = require("./command/export/cli/usage");
 const {compareCommandUsage} = require("./command/compare/cli/usage");
 const {compare} = require("./command/compare/main/compare-service");
+const {credentialsManagerCommandUsage} = require("./command/credentials-manager/cli/usage");
 
 const _handleCmdOperation = async (cmdArgs, commandUsage, fnc) => {
     _isCommandOnly(cmdArgs) && CONSOLE_LOG.info(commandUsage) && process.exit(0);
@@ -50,6 +52,16 @@ const runDependencyManager = async (cmdArgs) => {
 }
 
 /**
+ * Run credentials-manager command entry point
+ *
+ * @param cmdArgs
+ * @returns {Promise<void>}
+ */
+const runCredentialsManager = async (cmdArgs) => {
+    await _handleCmdOperation(cmdArgs, credentialsManagerCommandUsage, credentialsManager);
+}
+
+/**
  * Run compare command entry point
  *
  * @param cmdArgs
@@ -71,6 +83,7 @@ module.exports = {
     runExport,
     runCheck,
     runDependencyManager,
+    runCredentialsManager,
     runHelp,
     runCompare
 }

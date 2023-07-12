@@ -18,6 +18,7 @@ const callCommand = async (url, method, data, token = null, options = {}) => {
         return response?.data;
     } catch (e) {
         CONSOLE_LOG.info(e);
+        CONSOLE_LOG.error(JSON.stringify(e?.response?.data, null, 4));
         return e.response?.data;
     }
 };
