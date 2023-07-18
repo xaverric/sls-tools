@@ -2,7 +2,6 @@ const {promptAccessCodes} = require("../../../utils/prompt/prompt-module");
 const {callCommand} = require("../../../client/calls");
 const {loadJsonFile} = require("../../../utils/fs-helper");
 const {CONSOLE_LOG} = require("../../../logger/logger");
-const Console = require("console");
 
 const USER_REGISTRATION_POSITION = 0;
 const USER_ACTIVATION_POSITION = 1;

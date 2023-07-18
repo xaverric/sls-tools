@@ -61,7 +61,7 @@ const cmdCredentialsManagerArgumentsDefinition = [
     },
     {
         name: 'activate',
-        type: String,
+        type: Boolean,
         description: 'Flag identifying whether the user should be activated.'
     }
 ];
