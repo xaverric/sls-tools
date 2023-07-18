@@ -1,6 +1,6 @@
 {
   "name": "sls-tools",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "Your daily helper tool you didn't know you needed",
   "main": "cli.js",
   "scripts": {},
