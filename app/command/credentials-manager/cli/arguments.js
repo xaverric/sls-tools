@@ -53,6 +53,16 @@ const cmdCredentialsManagerArgumentsDefinition = [
         name: 'accessCode2',
         type: String,
         description: 'Access Code 2 value'
+    },
+    {
+        name: 'create',
+        type: Boolean,
+        description: 'Flag identifying whether the user should be created.'
+    },
+    {
+        name: 'activate',
+        type: String,
+        description: 'Flag identifying whether the user should be activated.'
     }
 ];
 

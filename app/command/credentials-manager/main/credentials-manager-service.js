@@ -19,8 +19,8 @@ const credentialsManager = async (cmdArgs, configuration) => {
 
     CONSOLE_LOG.info(JSON.stringify(oidcData, null, 4));
 
-    await handleCommandCall(callCommand, registrationCommand.uri, registrationCommand.method.toUpperCase(), userData, registrationCommand.token);
-    await handleCommandCall(callCommand, activationCommand.uri, activationCommand.method.toUpperCase(), oidcData, activationCommand.token);
+    cmdArgs.create && await handleCommandCall(callCommand, registrationCommand.uri, registrationCommand.method.toUpperCase(), userData, registrationCommand.token);
+    cmdArgs.activate && await handleCommandCall(callCommand, activationCommand.uri, activationCommand.method.toUpperCase(), oidcData, activationCommand.token);
 }
 
 const _buildUserDataDtoIn = (cmdArgs) => {
