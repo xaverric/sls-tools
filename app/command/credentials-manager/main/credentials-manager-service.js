@@ -2,6 +2,7 @@ const {promptAccessCodes} = require("../../../utils/prompt/prompt-module");
 const {callCommand} = require("../../../client/calls");
 const {loadJsonFile} = require("../../../utils/fs-helper");
 const {CONSOLE_LOG} = require("../../../logger/logger");
+const Console = require("console");
 
 const USER_REGISTRATION_POSITION = 0;
 const USER_ACTIVATION_POSITION = 1;
@@ -11,6 +12,9 @@ const credentialsManager = async (cmdArgs, configuration) => {
     const activationCommand = configuration["credentials-manager"][USER_ACTIVATION_POSITION];
 
     const userData = cmdArgs.userData ? loadJsonFile(cmdArgs.userData) : _buildUserDataDtoIn(cmdArgs);
+
+    CONSOLE_LOG.info(JSON.stringify(userData, null, 4));
+
     const oidcData = await _buildOidcDtoIn(activationCommand, userData, cmdArgs);
 
     CONSOLE_LOG.info(JSON.stringify(oidcData, null, 4));
