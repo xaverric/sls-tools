@@ -10,8 +10,8 @@ const credentialsManager = async (cmdArgs, configuration) => {
     const registrationCommand = configuration["credentials-manager"][USER_REGISTRATION_POSITION];
     const activationCommand = configuration["credentials-manager"][USER_ACTIVATION_POSITION];
 
-    const userData = loadJsonFile(cmdArgs.userData);
-    const oidcData = await _buildOidcDtoIn(activationCommand, userData);
+    const userData = cmdArgs.userData ? loadJsonFile(cmdArgs.userData) : _buildUserDataDtoIn(cmdArgs);
+    const oidcData = await _buildOidcDtoIn(activationCommand, userData, cmdArgs);
 
     CONSOLE_LOG.info(JSON.stringify(oidcData, null, 4));
 
@@ -19,8 +19,20 @@ const credentialsManager = async (cmdArgs, configuration) => {
     await handleCommandCall(callCommand, activationCommand.uri, activationCommand.method.toUpperCase(), oidcData, activationCommand.token);
 }
 
-const _buildOidcDtoIn = async (activationCommand, userData) => {
-    const accessCodes = await promptAccessCodes();
+const _buildUserDataDtoIn = (cmdArgs) => {
+    return {
+        uuIdentity: cmdArgs.uuIdentity,
+        party: cmdArgs.party,
+        firstName: cmdArgs.firstName,
+        lastName: cmdArgs.lastName,
+        email: cmdArgs.email,
+        groups: cmdArgs.groups,
+        type: cmdArgs.type
+    }
+}
+
+const _buildOidcDtoIn = async (activationCommand, userData, cmdArgs) => {
+    const accessCodes = cmdArgs.accessCode1 && cmdArgs.accessCode2 ? cmdArgs : await promptAccessCodes();
     return {
         ...activationCommand.dtoIn,
         "identityAccountCode": userData.uuIdentity,
