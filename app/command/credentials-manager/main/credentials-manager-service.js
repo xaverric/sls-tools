@@ -15,8 +15,8 @@ const credentialsManager = async (cmdArgs, configuration) => {
 
     CONSOLE_LOG.info(JSON.stringify(oidcData, null, 4));
 
-    await callCommand(registrationCommand.uri, registrationCommand.method.toUpperCase(), userData, registrationCommand.token);
-    await callCommand(activationCommand.uri, activationCommand.method.toUpperCase(), oidcData, activationCommand.token);
+    await handleCommandCall(callCommand, registrationCommand.uri, registrationCommand.method.toUpperCase(), userData, registrationCommand.token);
+    await handleCommandCall(callCommand, activationCommand.uri, activationCommand.method.toUpperCase(), oidcData, activationCommand.token);
 }
 
 const _buildOidcDtoIn = async (activationCommand, userData) => {
@@ -27,6 +27,19 @@ const _buildOidcDtoIn = async (activationCommand, userData) => {
         "newAccessCode1": accessCodes.accessCode1,
         "newAccessCode2": accessCodes.accessCode2
     }
+}
+
+const handleCommandCall = async (command, uri, method, data, token) => {
+    const result = await command(uri, method, data, token);
+    if (!isEmptyUuAppErrorMap(result)) {
+        throw new Error("Error during the command call - terminating.");
+    } else {
+        CONSOLE_LOG.info(`Command performed successfully - ${uri}`);
+    }
+}
+
+const isEmptyUuAppErrorMap = (dtoOut) => {
+    return Object.keys(dtoOut?.uuAppErrorMap).length === 0;
 }
 
 module.exports = {
