@@ -1,5 +1,5 @@
 /**
- * Builder function providing the data needed for visualization of table
+ * Builder function providing the data needed for visualization of csv table
  *
  * @param data
  * @param exportItem
@@ -9,15 +9,12 @@ const build = (data, exportItem) => {
     return [
         getTableColumns(data, exportItem),
         getTableData(data, exportItem)
-    ]
+    ].join("\n");
 }
 
 const getTableColumns = (data, exportItem) => {
     return guessKeys(data)
         .filter(key => exportItem?.visualize?.attributes?.includes(key))
-        .map(key => {
-            return {header: key}
-        });
 }
 
 const getTableData = (data, exportItem) => {
@@ -28,7 +25,7 @@ const getTableData = (data, exportItem) => {
                 newItem[attr] = item[attr]
             })
             return newItem;
-        }).map(item => Object.values(item));
+        }).map(item => Object.values(item).join(",")).join("\n");
 }
 
 const guessKeys = array => {

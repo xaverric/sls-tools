@@ -28,11 +28,19 @@ file.
 Flag defining whether full export data should be uploaded to predefined bookkit page.
 
 ### -v, --visualize         
-Flag defining whether all exported files should be visualized in bookkit. 
+Flag defining whether all exported files should be visualized in bookkit or CSV. If not defined, bookkit is default. 
+
+#### Supported types of visualization
+
+* ``csv`` - visualize result into the CSV document
+* ``bookkit`` - visualize result into the Bookkit page
 
 #### Supported types of visualizations
 * ``list`` - visualization type applicable for list outputs. In that case, table with predefined columns is generated within the bookkit page.
-* ``object`` - visualization type applicable for single object outputs. In that case, whole object will be displayed in the bookkit page. 
+* ``object`` - visualization type applicable for single object outputs. In that case, whole object will be displayed in the bookkit page.
+
+### --idFilter
+Array of IDs for executing only such command with given id. Multiple IDs can be provided.
 
 ## Configuration
 This configuration snippet below describes only the changes to the base configuration documented [here](../../../readme.md).
@@ -44,6 +52,7 @@ module.exports = {
     exports: [
         // cmd export type
         {
+            "id": "...", // unique id identificator
             "exportType": "cmd",
             "uuApp": "uuAppName1", // uuApp name defined in the uuApp.subAppList, used for building the whole URI and also for the authorization token information
             "command": "user/list", // command which should be called

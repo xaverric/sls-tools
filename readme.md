@@ -143,6 +143,14 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
 
+### 1.8.0
+* Extend export command to be able to visualize data right into the CSV apart from the bookkit visualization. If not specified, the bookkit visualization is used by default.
+* Added support to filter export commands by their IDs.
+* Code refactor related to the export visualization.
+
+### 1.7.1 - 1.7.5 
+* Credentials manager improvements and fixed. User data can not be provided right from the command line interface without the need of temporary JSON file.
+
 ### 1.7.0
 * Added support for easy user registration via command line interface. 
 

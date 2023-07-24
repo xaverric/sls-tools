@@ -1,5 +1,5 @@
 const {uploadFile, createSection} = require("../../../../bookkit/client/bookkit-client");
-const createUu5String = require("./visualization/full-export-uu5string-builder");
+const createUu5String = require("../visualize/bookkit/full-export-uu5string-builder");
 const fs = require("fs");
 
 const processFullExportUpload = async (configuration) => {

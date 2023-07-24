@@ -23,9 +23,16 @@ const cmdExportArgumentsDefinition = [
     {
         name: 'visualize',
         alias: 'v',
-        type: Boolean,
-        description: 'Flag defining whether all exported files should be visualize in bookkit.'
-    }
+        multiple: true,
+        type: String,
+        description: 'bookkit|csv - Flag defining whether all exported files should be visualize in bookkit or CSV. Bookkit is default if not specified'
+    },
+    {
+        name: 'idFilter',
+        multiple: true,
+        type: String,
+        description: 'Filter for executing only such command with given id. Multiple IDs can be provided.'
+    },
 ];
 
 const cmdExportArguments = commandLineArgs(cmdExportArgumentsDefinition, {stopAtFirstUnknown: true});

@@ -2,7 +2,7 @@ const {CONSOLE_LOG} = require("../../../logger/logger");
 const {handleCmdExport} = require("./cmd/cmd-data-exporter");
 const {fullExport} = require("./zip/zip-exporter");
 const {handleK8sExport} = require("./k8s/k8s-data-exporter");
-const {processVisualization} = require("./bookkit/visualizations-service");
+const {visualize} = require("./visualize/visualization-service");
 const {processFullExportUpload} = require("./bookkit/full-export-upload-service");
 
 const EXPORTERS = [
@@ -29,9 +29,10 @@ const exportData = async (cmdArgs, configuration) => {
     for (const exportType of cmdArgs.exportType) {
         CONSOLE_LOG.info(`Exporting data using ${exportType} export type`);
         let filteredItems = configuration.exports.filter(item => item.exportType === exportType);
+        filteredItems = filterById(cmdArgs, configuration, filteredItems);
 
         await processExportItems(filteredItems, exportWithRepeat);
-        cmdArgs.visualize && await processExportItems(filteredItems, (exportItem) => processVisualization(exportItem, configuration));
+        cmdArgs.visualize && await processExportItems(filteredItems, (exportItem) => visualize(exportItem, configuration, cmdArgs));
     }
 
     cmdArgs.fullExport && fullExport(configuration);
@@ -54,6 +55,10 @@ const processExportItems = async (exportItems, fnc) => {
     for (const exportItem of exportItems) {
         await fnc(exportItem);
     }
+}
+
+const filterById = (cmdArgs, configuration, filteredItems) => {
+    return cmdArgs.idFilter ? filteredItems.filter(item => cmdArgs.idFilter.includes(item.id)) : filteredItems;
 }
 
 module.exports = {
