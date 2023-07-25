@@ -9,6 +9,10 @@ const handleBookkitVisualization = async (exportItem, configuration) => {
     if (isVisualizable(exportItem)) {
         CONSOLE_LOG.info(`Visualizing ${exportItem.name}`)
         let data = await readDataForVisualization(exportItem);
+        if (!data) {
+            CONSOLE_LOG.warn("Nothing to visualize, empty data gathered.")
+            return;
+        }
         let uu5StringBuilderFnc = decideUu5StringTemplateBuilder(exportItem.visualize.type);
         let uu5StringContent = uu5StringBuilderFnc(exportItem, data);
         await updateSection(configuration.bookkit.uri, exportItem.visualize.page, exportItem.visualize.code, uu5StringContent, configuration.bookkit.token);
