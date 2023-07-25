@@ -9,7 +9,7 @@ const handleCsvVisualization = async (exportItem, configuration) => {
         CONSOLE_LOG.info(`Visualizing ${exportItem.name}`)
         let data = await readDataForVisualization(exportItem);
         let csvContent = buildTableData(data, exportItem);
-        storeFile(configuration.tempDir, `export-visualization_${exportItem.name}.csv`, csvContent);
+        storeFile(configuration.tempDir, `export-visualization_${exportItem.name}_${configuration.uuApp.shortName}.csv`, csvContent);
     }
 }
 
