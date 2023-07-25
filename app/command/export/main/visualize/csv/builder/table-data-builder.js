@@ -25,7 +25,7 @@ const getTableData = (data, exportItem) => {
                 newItem[attr] = item[attr]
             })
             return newItem;
-        }).map(item => Object.values(item).join(",")).join("\n");
+        }).map(item => Object.values(item).join(";")).join("\n");
 }
 
 const guessKeys = array => {
