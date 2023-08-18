@@ -5,7 +5,8 @@ const { cmdCheckArguments } = require("../../command/check/cli/arguments");
 const { cmdDependencyManagerArguments } = require("../../command/dependency-manager/cli/arguments");
 const { cmdCredentialsManagerArguments } = require("../../command/credentials-manager/cli/arguments");
 const { cmdCompareArguments } = require("../../command/compare/cli/arguments");
-const { runExport, runHelp, runCheck, runDependencyManager, runCompare, runCredentialsManager} = require('../../sls-tools');
+const { cmdExecuteArguments } = require("../../command/execute/cli/arguments");
+const { runExport, runHelp, runCheck, runDependencyManager, runCompare, runCredentialsManager, runExecute} = require('../../sls-tools');
 
 const COMMANDS = {
   COMMAND_HELP: 'help',
@@ -13,7 +14,8 @@ const COMMANDS = {
   COMMAND_CHECK: 'check',
   COMMAND_DEPENDENCY_MANAGER: 'dependency-manager',
   COMMAND_CREDENTIALS_MANAGER: 'credentials-manager',
-  COMMAND_COMPARE: 'compare'
+  COMMAND_COMPARE: 'compare',
+  COMMAND_EXECUTE: 'execute'
 };
 
 const actions = {
@@ -46,6 +48,11 @@ const actions = {
     condition: () => handleCondition(cmdArguments.command === COMMANDS.COMMAND_COMPARE, cmdCompareArguments),
     actionArguments: () => cmdCompareArguments,
     action: async () => await runCompare({...cmdArguments, ...cmdCompareArguments})
+  },
+  runExecute: {
+    condition: () => handleCondition(cmdArguments.command === COMMANDS.COMMAND_EXECUTE, cmdExecuteArguments),
+    actionArguments: () => cmdExecuteArguments,
+    action: async () => await runExecute({...cmdArguments, ...cmdExecuteArguments})
   }
 };
 

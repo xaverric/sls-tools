@@ -15,6 +15,7 @@ const CONFIG_DEFAULT_PATH = path.join(os.homedir(), '.sls-tools', 'config.js');
 
 const EXPORTS_ITEM_TYPE = "exports";
 const CHECKS_ITEM_TYPE = "checks";
+const EXECUTE_ITEM_TYPE = "execute";
 const CREDENTIALS_MANAGER_ITEM_TYPE = "credentials-manager";
 
 const COMMAND_TO_CONFIG_MAPPING = {
@@ -52,6 +53,15 @@ const COMMAND_TO_CONFIG_MAPPING = {
     },
     compare: {
         configLoad: []
+    },
+    execute: {
+        configLoad: [
+            resolveUuAppAuthorization,
+            resolveUuAppBaseUri,
+            (configuration) => resolveTempDirForType(configuration, EXECUTE_ITEM_TYPE),
+            (configuration) => resolveCmdCommand(configuration, EXECUTE_ITEM_TYPE),
+            (configuration) => resolveCmdToken(configuration, EXECUTE_ITEM_TYPE)
+        ]
     }
 }
 

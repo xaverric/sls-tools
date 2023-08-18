@@ -28,12 +28,13 @@ sls-tools <command> <command parameters>
 * [dependency-manager](app/command/dependency-manager/readme.md)
 * [credentials-manager](app/command/credentials-manager/readme.md)
 * [compare](app/command/compare/readme.md)
+* [execute](app/command/execute/readme.md)
 
 ## Parameters
 
 ### --command string
 
-export, help commands. All these can be used as default commands without providing --command argument.
+``export``, ``check``, ``dependency-manager``, ``credentials-manager``, ``compare``, ``execute`` commands. All these can be used as default commands without providing --command argument.
 
 ### -c, --config string
 
@@ -204,18 +205,4 @@ First iteration which is not covering whole implementation set, specifically loc
 * visualization export improvement - added support to visualize objects
 
 ## TODO
-- call
-    - same as export but only calls the URLs, does not store anything
-    - support to load the dtoIn list file and execute the dtoIns against same command (replacement for uuCommander)
-    - modes
-        - ```calls``` array with same definition as check item
-            - for every dtoIn uuApp is specified individually, same as group, etc
-        - dtoIn list file path
-            - support to load file
-            - define command to call, uuApp, + method
-        - define exact URL to call plus dtoIn
-- compare
-    - suitable for fullExport comparison
-- authorization
-    - support oidc-plus4u-vault
-    - store token for every uuApp individually into file system and reuse it if possible
+- call - uucommander alternative

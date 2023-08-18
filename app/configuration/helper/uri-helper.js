@@ -17,19 +17,31 @@ const resolveCmdCommand = async (configuration, type) => {
 
 const resolveCmdCommandForEnvironment = (configuration, type) => {
     configuration?.[type]
-        ?.filter(item => item.exportType === "cmd" || type === "checks" || type === "credentials-manager")
+        ?.filter(item => item.exportType === "cmd" || type === "checks" || type === "credentials-manager" ||type === "execute")
         ?.forEach(item => {
-            item.uri = [
-                _findSubAppConfiguration(configuration, item)?.baseUri,
-                item.command
-            ].join("/");
+            if (item.uuApp) {
+                item.uri = [
+                    _findSubAppConfiguration(configuration, item.uuApp)?.baseUri,
+                    item.command
+                ].join("/");
+            } else if (item.uuAppList) {
+                item.uuAppList = item.uuAppList.flatMap(uuApp => {
+                    return {
+                        uuApp: uuApp,
+                        uri: [
+                            _findSubAppConfiguration(configuration, uuApp)?.baseUri,
+                            item.command
+                        ].join("/")
+                    };
+                })
+            }
             return item;
         });
     return configuration;
 }
 
-const _findSubAppConfiguration = (configuration, item) => {
-    return configuration.uuApp.subAppList.find(subApp => subApp.name === item.uuApp);
+const _findSubAppConfiguration = (configuration, uuApp) => {
+    return configuration.uuApp.subAppList.find(subApp => subApp.name === uuApp);
 }
 
 module.exports = {

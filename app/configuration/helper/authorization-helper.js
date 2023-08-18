@@ -33,17 +33,32 @@ const resolveCmdToken = async (configuration, type) => {
 
 const resolveCmdTokenForEnvironment = (environment, type) => {
     environment?.[type]
-        ?.filter(item => item.exportType === "cmd" || type === "checks" || type === "credentials-manager")
+        ?.filter(item => item.exportType === "cmd" || type === "checks" || type === "credentials-manager" || type === "execute")
         ?.forEach(item => {
-            const oidcIdentity = _findSubAppConfiguration(environment, item)?.auth;
-            item.token = environment.uuApp.oidc[oidcIdentity]?.token;
+            if (item.uuApp) {
+                const oidcIdentity = _findSubAppConfiguration(environment, item.uuApp)?.auth;
+                item.token = environment.uuApp.oidc[oidcIdentity]?.token;
+            } else if (item.uuAppList) {
+                item.uuAppList = item.uuAppList
+                    .map(uuApp => {
+                        const oidcIdentity = _findSubAppConfiguration(environment, uuApp.uuApp)?.auth;
+                        return {
+                            ...uuApp,
+                            token: environment.uuApp.oidc[oidcIdentity]?.token
+                        };
+                    })
+                    .reduce((acc, item) => {
+                        acc[item.uuApp] = item
+                        return acc;
+                    }, {})
+            }
             return item;
         });
     return environment;
 }
 
-const _findSubAppConfiguration = (configuration, item) => {
-    return configuration.uuApp.subAppList.find(subApp => subApp.name === item.uuApp);
+const _findSubAppConfiguration = (configuration, uuApp) => {
+    return configuration.uuApp.subAppList.find(subApp => subApp.name === uuApp);
 }
 
 const _resolveAuthorizationStrategy = async (identity) => {

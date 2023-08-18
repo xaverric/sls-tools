@@ -10,8 +10,10 @@ const {dependencyManagerCommandUsage} = require("./command/dependency-manager/cl
 const {checkCommandUsage} = require("./command/check/cli/usage");
 const {exportCommandUsage} = require("./command/export/cli/usage");
 const {compareCommandUsage} = require("./command/compare/cli/usage");
+const {executeCommandUsage} = require("./command/execute/cli/usage");
 const {compare} = require("./command/compare/main/compare-service");
 const {credentialsManagerCommandUsage} = require("./command/credentials-manager/cli/usage");
+const {execute} = require("./command/execute/main/execute-service");
 
 const _handleCmdOperation = async (cmdArgs, commandUsage, fnc) => {
     _isCommandOnly(cmdArgs) && CONSOLE_LOG.info(commandUsage) && process.exit(0);
@@ -71,6 +73,16 @@ const runCompare = async (cmdArgs) => {
     await _handleCmdOperation(cmdArgs, compareCommandUsage, compare);
 }
 
+/**
+ * Run execute command entry point
+ *
+ * @param cmdArgs
+ * @returns {Promise<void>}
+ */
+const runExecute = async (cmdArgs) => {
+    await _handleCmdOperation(cmdArgs, executeCommandUsage, execute);
+}
+
 const runHelp = (usage) => {
     CONSOLE_LOG.info(usage);
 }
@@ -85,5 +97,6 @@ module.exports = {
     runDependencyManager,
     runCredentialsManager,
     runHelp,
-    runCompare
+    runCompare,
+    runExecute
 }
