@@ -12,7 +12,9 @@ sls-tools execute <parameters>
 
 ## Parameters
 
-The command does not have any specific parameters.
+### --group
+
+Run execute command for selected groups only.
 
 ## Configuration
 
@@ -26,6 +28,7 @@ module.exports = {
         // Order of the scripts in the groups matter, every script can read and use the dtoOut returned from the previous script in given group
         {
             group: "group name",
+            name: "script name",
             // uuApps to be used in the script, the tool will resolve the authorization token and AWID/ASID for every uuApp.
             uuAppList: [],
             /**

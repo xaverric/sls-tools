@@ -5,7 +5,8 @@ const slsToolsApi = require("./api/sls-tools-api");
 const execute = async (cmdArgs, configuration) => {
     CONSOLE_LOG.info(`Processing execute for environment: ${configuration.uuApp.name}`);
     const executeGroups = groupBy(configuration.execute, "group");
-    for (const executeGroup of Object.keys(executeGroups)) {
+    const filteredGroups = Object.keys(executeGroups).filter(groupName => cmdArgs?.group?.includes(groupName));
+    for (const executeGroup of (filteredGroups || [])) {
         CONSOLE_LOG.info(`Executing scripts from group ${executeGroup}`);
         let lastDtoOut = undefined;
         for (const executionItem of executeGroups[executeGroup]) {

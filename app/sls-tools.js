@@ -80,6 +80,7 @@ const runCompare = async (cmdArgs) => {
  * @returns {Promise<void>}
  */
 const runExecute = async (cmdArgs) => {
+    console.log(cmdArgs);
     await _handleCmdOperation(cmdArgs, executeCommandUsage, execute);
 }
 

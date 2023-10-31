@@ -144,6 +144,12 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
 
+### 1.9.1
+* Support to filter execution items by groups
+
+### 1.9.0
+* Added new command - [execute](app/command/execute/readme.md)
+
 ### 1.8.0
 * Extend export command to be able to visualize data right into the CSV apart from the bookkit visualization. If not specified, the bookkit visualization is used by default.
 * Added support to filter export commands by their IDs.
