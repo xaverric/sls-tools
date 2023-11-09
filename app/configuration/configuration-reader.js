@@ -8,6 +8,7 @@ const {resolveK8sExportItem} = require("./helper/k8s-export-item-helper");
 const {resolveEnvironment} = require("./helper/environment-filter-helper");
 const {resolveGitConfiguration} = require("./helper/git-config-helper");
 const {CONSOLE_LOG} = require("../logger/logger");
+const {processParams} = require("./helper/params-processor");
 
 const EMPTY_CONFIG = [{}];
 
@@ -60,7 +61,8 @@ const COMMAND_TO_CONFIG_MAPPING = {
             resolveUuAppBaseUri,
             (configuration) => resolveTempDirForType(configuration, EXECUTE_ITEM_TYPE),
             (configuration) => resolveCmdCommand(configuration, EXECUTE_ITEM_TYPE),
-            (configuration) => resolveCmdToken(configuration, EXECUTE_ITEM_TYPE)
+            (configuration) => resolveCmdToken(configuration, EXECUTE_ITEM_TYPE),
+            (configuration, cmdArgs) => processParams(configuration, cmdArgs)
         ]
     }
 }
@@ -84,7 +86,7 @@ const readConfiguration = async cmdArgs => {
     configuration = await resolveTempDir(configuration);
 
     for (const configLoadFnc of COMMAND_TO_CONFIG_MAPPING[cmdArgs.command].configLoad) {
-        configuration = await configLoadFnc(configuration);
+        configuration = await configLoadFnc(configuration, cmdArgs);
     }
 
     return configuration;

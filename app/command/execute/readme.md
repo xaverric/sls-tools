@@ -16,6 +16,29 @@ sls-tools execute <parameters>
 
 Run execute command for selected groups only.
 
+### --params
+Parameters support to be able to parametrize the execution datasets. It is not allowed to have an empty string in the text parameter value. The space serves as a delimiter of all the provided parameters. Quoting the parameter value does not work.
+Within the dataset, the parameters are available in ``configuration`` object under the ``executeParams`` attribute.
+
+*Parameter Convention Definition*
+```bash
+# Definition 
+key=value
+
+# Example
+sls-tools execute --config [path] -e [env] --params parameter1=textvalue parameter2=2
+```
+
+*Usage in Execution Dataset*
+```js
+module.exports = async (slsToolsApi, options) => {
+    // Initialization section
+    const executeParams = options.configuration.executeParams;
+    // Script logic
+    // Return response
+}
+```
+
 ## Configuration
 
 This configuration snippet below describes only the changes to the base configuration
@@ -72,17 +95,17 @@ module.exports = {
 
 Object containing helper methods and objects, which can be used in the called script
 
-#### call
+#### Client
 ```js
 /**
- * sls-tools call command API to be used in the custom scripts execution
+ * sls-tools Client API to be used in the custom scripts execution
  *
- * @param method - http method
  * @param uuApp - uuApp object name from the configuration, by the uuApp name, the sls-tools automatically resolved the authorization token
  * @param command - command to be called over the uuApp, i.e. user/list
  * @param dtoIn - command dtoIn object
  */
-const call = async (method, uuApp, command, dtoIn) => {}
+static post = async (uuApp, command, dtoIn) => {}
+static get = async (uuApp, command, dtoIn) => {}
 ```
 
 #### generateToCSV

@@ -1,6 +1,8 @@
 const {callCommand} = require("../../../../../client/calls");
 
 /**
+ * @deprecated
+ *
  * sls-tools callCommand API to be used in the custom scripts execution
  *
  * @param method - http method

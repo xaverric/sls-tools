@@ -144,6 +144,9 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
 
+### 1.9.2
+* Support to parametrize the execution dataset with the additional CLI parameters.
+
 ### 1.9.1
 * Support to filter execution items by groups
 
