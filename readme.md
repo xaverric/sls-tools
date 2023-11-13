@@ -144,6 +144,9 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
 
+### 1.9.3
+* replaced json-diff library with jsondiffpatch for comparison purposes.
+
 ### 1.9.2
 * Support to parametrize the execution dataset with the additional CLI parameters.
 

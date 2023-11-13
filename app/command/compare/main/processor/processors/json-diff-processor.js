@@ -1,4 +1,4 @@
-const jsonDiff = require("json-diff");
+const jsondiffpatch = require('jsondiffpatch');
 const {CONSOLE_LOG} = require("../../../../../logger/logger");
 
 const processJson = (zipEntry, zipEntries) => {
@@ -19,21 +19,17 @@ const canProcess = (zipEntry) => {
 }
 
 const _getDiff = (left, right) => {
-    let diff = jsonDiff.diffString(left, right, {color: false, full: false});
-    return _processDiff(diff);
+    let diff = jsondiffpatch.diff(left, right);
+    return _processDiff(jsondiffpatch.formatters.console.format(diff));
 }
 
 const _processDiff = (diff) => {
     if (diff) {
-        const newValues = diff.split("\n").filter(item => item.trim().startsWith("+"));
-        const oldValues = diff.split("\n").filter(item => item.trim().startsWith("-"));
-        newValues.forEach(newValue => {
-            diff = diff.replaceAll(newValue, `<span class="plus">${newValue.trim()}</span>`)
-        });
-        oldValues.forEach(oldValue => {
-            diff = diff.replaceAll(oldValue, `<span class="minus">${oldValue.trim()}</span>`)
-        });
-        diff = diff.replaceAll("...\n", "");
+        diff = diff.replaceAll("[31m", `<span class="minus">`);
+        diff = diff.replaceAll("[32m", `<span class="plus">`);
+        diff = diff.replaceAll("[39m", `</span>`);
+        diff = diff.replaceAll("=>", `<b>=></b>`);
+        diff = diff.replace(/(\[90m)(\w+,\w+)/g, `<span style="color: #aaaac0">$2</span>`);
     }
     return diff;
 }
