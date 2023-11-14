@@ -24,7 +24,6 @@ const _getDiff = (left, right) => {
 }
 
 const _processDiff = (diff) => {
-    console.log(`before replacement - ${diff}`);
     if (diff) {
         diff = diff.replaceAll("[31m", `<span class="minus">`);
         diff = diff.replaceAll("[32m", `<span class="plus">`);
@@ -32,7 +31,6 @@ const _processDiff = (diff) => {
         diff = diff.replaceAll("=>", `<b>=></b>`);
         diff = diff.replace(/(\[90m)(\w+,\w+)/g, `<span style="color: #aaaac0">$2</span>`);
     }
-    console.log(`after replacement - ${diff}`);
     return diff;
 }
 
