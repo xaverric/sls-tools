@@ -144,6 +144,12 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
 
+### 1.9.7
+* added Handlebars support into the slsToolsApi 
+
+### 1.9.4 - 1.9.6 
+* optimizations of the visualizations
+
 ### 1.9.3
 * replaced json-diff library with jsondiffpatch for comparison purposes.
 

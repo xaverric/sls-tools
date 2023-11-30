@@ -1,6 +1,6 @@
 {
   "name": "sls-tools",
-  "version": "1.9.6",
+  "version": "1.9.7",
   "description": "Your daily helper tool you didn't know you needed",
   "main": "cli.js",
   "scripts": {},
@@ -14,7 +14,7 @@
     "csvtojson": "^2.0.10",
     "fast-xml-parser": "^4.2.7",
     "fs-extra": "^11.1.0",
-    "handlebars": "^4.7.7",
+    "handlebars": "^4.7.8",
     "inquirer": "^8.2.5",
     "js-yaml": "^4.1.0",
     "json-diff": "^1.0.6",

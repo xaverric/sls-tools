@@ -5,6 +5,7 @@ const {CONSOLE_LOG} = require("../../../../logger/logger");
 const {XMLParser} = require("fast-xml-parser");
 const csvtojson = require("csvtojson");
 const AdmZip = require("adm-zip");
+const Handlebars = require("handlebars");
 
 module.exports = {
     call,
@@ -13,5 +14,6 @@ module.exports = {
     CONSOLE_LOG,
     XMLParser,
     csvtojson,
-    AdmZip
+    AdmZip,
+    Handlebars
 }

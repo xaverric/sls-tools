@@ -133,3 +133,6 @@ csvtojson object available from ``csvtojson`` library.
 
 #### AdmZip
 AdmZip object from the ``adm-zip`` library.
+
+#### Handlebars
+Handlebars object from the ```handlebars.js``` library
