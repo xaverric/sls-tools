@@ -6,6 +6,8 @@ const {XMLParser} = require("fast-xml-parser");
 const csvtojson = require("csvtojson");
 const AdmZip = require("adm-zip");
 const Handlebars = require("handlebars");
+const diffResultModule = require('simple-text-diff')
+const DiffResult = diffResultModule.default;
 
 module.exports = {
     call,
@@ -15,5 +17,6 @@ module.exports = {
     XMLParser,
     csvtojson,
     AdmZip,
-    Handlebars
+    Handlebars,
+    DiffResult
 }

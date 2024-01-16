@@ -136,3 +136,6 @@ AdmZip object from the ``adm-zip`` library.
 
 #### Handlebars
 Handlebars object from the ```handlebars.js``` library
+
+#### DiffResult
+DiffResult from the ```simple-text-diff``` library for easy string to string comparison which wraps the differences into the HTML tags for easy visualization.
