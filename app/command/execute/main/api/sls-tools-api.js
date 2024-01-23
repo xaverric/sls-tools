@@ -8,6 +8,7 @@ const AdmZip = require("adm-zip");
 const Handlebars = require("handlebars");
 const diffResultModule = require('simple-text-diff')
 const DiffResult = diffResultModule.default;
+const jsondiffpatch = require("jsondiffpatch");
 
 module.exports = {
     call,
@@ -18,5 +19,6 @@ module.exports = {
     csvtojson,
     AdmZip,
     Handlebars,
-    DiffResult
+    DiffResult,
+    jsondiffpatch
 }

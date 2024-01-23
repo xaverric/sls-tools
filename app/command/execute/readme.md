@@ -139,3 +139,6 @@ Handlebars object from the ```handlebars.js``` library
 
 #### DiffResult
 DiffResult from the ```simple-text-diff``` library for easy string to string comparison which wraps the differences into the HTML tags for easy visualization.
+
+#### jsondiffpatch
+DiffResult from the ```jsondiffpatch``` library for easy string to string comparison.
