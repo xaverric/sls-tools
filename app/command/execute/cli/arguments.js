@@ -10,6 +10,17 @@ const cmdExecuteArgumentsDefinition = [
         description: 'Run execute command for selected groups only.'
     },
     {
+        name: 'mode',
+        alias: 'm',
+        type: String,
+        description: 'full|noEnv - define what mode should be used for execute command. In full mode (default), the environment must be specified. With noEnv mode, it is required to provide path to the index.js file of the execution dataset.'
+    },
+    {
+        name: 'path',
+        type: String,
+        description: 'Path to the index.js file of the execution dataset.'
+    },
+    {
         name: 'params',
         alias: 'p',
         type: String,
