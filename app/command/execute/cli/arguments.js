@@ -21,6 +21,12 @@ const cmdExecuteArgumentsDefinition = [
         description: 'Path to the index.js file of the execution dataset.'
     },
     {
+        name: 'outputDir',
+        alias: 'o',
+        type: String,
+        description: 'Path where to save the output in noEnv mode.'
+    },
+    {
         name: 'params',
         alias: 'p',
         type: String,
