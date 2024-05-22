@@ -144,6 +144,9 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
 
+### 1.9.10
+* [check](app/command/check/readme.md) command - custom email recipients support provided via CLI
+
 ### 1.9.7
 * added Handlebars support into the slsToolsApi 
 

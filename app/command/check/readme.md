@@ -28,6 +28,9 @@ Flag defining whether all checks should be visualized in the predefined bookkit 
 ### --emailNotification      
 Flag defining whether the output from checks should be sent via email.
 
+###  --recipients
+Recipient list which overrides the recipient list defined in the configuration. 
+
 ## Configuration
 This configuration snippet below describes only the changes to the base configuration documented [here](../../../readme.md).
 ```js

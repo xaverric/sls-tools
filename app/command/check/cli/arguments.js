@@ -29,6 +29,12 @@ const cmdCheckArgumentsDefinition = [
         name: 'emailNotification',
         type: Boolean,
         description: 'Flag defining whether the output from checks should be sent via email.'
+    },
+    {
+        name: 'recipients',
+        type: String,
+        multiple: true,
+        description: 'Recipient list which overrides the recipient list defined in the configuration.'
     }
 ];
 

@@ -9,7 +9,8 @@ const sendEmailNotification = async (cmdArgs, configuration, groupedResults) => 
 }
 
 const _sendEmailForRecipients = async (cmdArgs, configuration, emailContent, transporter) => {
-    for (const recipient of configuration.email.recipients) {
+    const recipients = cmdArgs.recipients || configuration.email.recipients;
+    for (const recipient of recipients) {
         CONSOLE_LOG.info(`Sending email notification to recipient: ${recipient}`);
         let info = await transporter.sendMail({
             from: '"sls-tools notification 👀" <noreply@sls-tools.com>',
