@@ -9,6 +9,7 @@ const Handlebars = require("handlebars");
 const diffResultModule = require('simple-text-diff')
 const DiffResult = diffResultModule.default;
 const jsondiffpatch = require("jsondiffpatch");
+const Excel = require("excel4node");
 
 module.exports = {
     call,
@@ -20,5 +21,6 @@ module.exports = {
     AdmZip,
     Handlebars,
     DiffResult,
-    jsondiffpatch
+    jsondiffpatch,
+    Excel
 }

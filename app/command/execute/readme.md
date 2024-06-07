@@ -14,7 +14,51 @@ sls-tools execute <parameters>
 
 ### --group
 
-Run execute command for selected groups only.
+Run execute command for selected groups only. Applicable for `full` mode only.
+
+### --mode
+
+Define what mode should be used for execute command.
+
+#### Supported modes
+
+* `full` - In this mode, commands are called against the selected environments, which are loaded from `--config`. The environment can be specified via `--environment` parameter (default).
+* `noEnv` - Use for execution datasets that do not require a connection to the environment. It is required to provide path to the index.js file of the dataset via `--path` parameter. Use with `--noconfig`.
+
+*Parameters passed to the execution dataset*
+* `full` mode
+```js
+slsToolsApi,
+//options
+{
+    cmdArgs,
+    configuration,
+    lastDtoOut,
+    uuAppList
+}
+```
+* `noEnv` mode
+```js
+slsToolsApi,
+//options
+{
+    cmdArgs,
+    configuration,
+    lastDtoOut
+}
+```
+
+### --path
+
+Path to the index.js file of the execution dataset. Applicable for `noEnv` mode only.
+
+### --outputDir
+Path where to save the output in `noEnv` mode. If not defined, the default value `%HOME%/sls-tools-temp` is used.
+
+#### noEnv mode command example
+```bash
+sls-tools execute --mode noEnv --path [path to index.js] --outputDir [path] --noconfig --noprompt --params [parameters]
+```
 
 ### --params
 Parameters support to be able to parametrize the execution datasets. It is not allowed to have an empty string in the text parameter value. The space serves as a delimiter of all the provided parameters. Quoting the parameter value does not work.
