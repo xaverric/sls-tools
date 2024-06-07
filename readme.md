@@ -144,6 +144,9 @@ logs are automatically stored to the ```%HOME%/.sls-tools/logs``` folder
 
 ## Changelog
 
+### 1.10.0
+* Added support for running [execute](app/command/execute/readme.md) command without the need of the configuration - helpful for execution datasets which does not need to perform anything against the environments.
+
 ### 1.9.10
 * [check](app/command/check/readme.md) command - custom email recipients support provided via CLI
 
