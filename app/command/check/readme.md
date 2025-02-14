@@ -22,6 +22,9 @@ Run checks for selected group names only.
 ### --problemReport
 Show only checks which did not pass the validation.
 
+### --checkReportSectionCode
+Override check report section code in the configuration - destination section where the report will be visualized.
+
 ### -v, --visualize
 Flag defining whether all checks should be visualized in the predefined bookkit page.
 
