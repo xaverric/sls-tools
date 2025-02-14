@@ -9,6 +9,11 @@ const cmdCheckArgumentsDefinition = [
         description: 'text|table|none - If text value is defined, checks will be logged into the console as a regular text. If table option is used, table form will be used to log into the console. If the attribute is not defined at all, no output will be shown in the console.'
     },
     {
+        name: 'checkReportSectionCode',
+        type: String,
+        description: 'Overrides bookkit section code defined in the configuration.'
+    },
+    {
         name: 'checkGroup',
         type: String,
         multiple: true,
