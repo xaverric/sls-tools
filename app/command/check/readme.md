@@ -42,6 +42,7 @@ module.exports = {
     checks: [
         {
             "checkGroup": "customGroupName", // custom group name for checks, when used, checks will be grouped within later processing to logical blocks with the same group name
+            "checkReportSectionCode": "...",  // code of the section in page in the bookkit, where the check group report should be stored
             "uuApp": "uuAppName1", // uuApp name defined in the uuApp.subAppList, used for building the whole URI and also for the authorization token information
             "command": "user/list", // command which should be called
             "method": "post", // HTTP method
