@@ -1,3 +1,5 @@
+const { enterStringNestedObjects } = require("../../../../../../bookkit/helper/uu5string-escape-helper");
+
 const template = (table, chart) => {
     const [tableColumns, tableData] = table;
     const [chartSeries, chartData, tableChartColumns, tableChartData] = chart;
@@ -48,7 +50,7 @@ const template = (table, chart) => {
                                 >
                                     <Uu5TilesBricks.Table 
                                         columns='<uu5json/>${JSON.stringify(tableColumns)}'
-                                        data='<uu5json/>${JSON.stringify(tableData[group])}'
+                                        data='<uu5json/>${enterStringNestedObjects(JSON.stringify(tableData[group]))}'
                                     />
                                 </UU5.Bricks.Panel>
                             `).join("")}
