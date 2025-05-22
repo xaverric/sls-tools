@@ -4,6 +4,7 @@ const {resolveUuAppAuthorization, resolveCmdToken, resolveBookkitAuthorization} 
 const {resolveTempDir, resolveTempDirForType} = require("./helper/temp-dir-helper");
 const {resolveUuAppBaseUri, resolveCmdCommand} = require("./helper/uri-helper");
 const {loadFile} = require("../utils/fs-helper");
+const {promptForEnvironment} = require("../utils/prompt/prompt-module.js");
 const {resolveK8sExportItem} = require("./helper/k8s-export-item-helper");
 const {resolveEnvironment} = require("./helper/environment-filter-helper");
 const {resolveGitConfiguration} = require("./helper/git-config-helper");
@@ -79,6 +80,25 @@ const readConfiguration = async cmdArgs => {
         configuration = await loadFile(path.resolve(cmdArgs.config));
     } else {
         configuration = await loadFile(CONFIG_DEFAULT_PATH);
+    }
+
+    // Interactive environment selection
+    if (cmdArgs.interactive && !cmdArgs.environment) {
+        let envNames = [];
+        if (Array.isArray(configuration)) {
+            envNames = configuration.map(conf => conf.uuApp?.name).filter(Boolean);
+        } else if (configuration && configuration.uuApp?.name) {
+            envNames = [configuration.uuApp.name];
+        }
+
+        if (envNames.length > 0) {
+            CONSOLE_LOG.debug(`Available environments for prompt: ${envNames.join(', ')}`);
+            const selectedEnv = await promptForEnvironment(envNames, cmdArgs);
+            cmdArgs.environment = selectedEnv ? [selectedEnv] : undefined;
+            CONSOLE_LOG.debug(`Environment selected via prompt: ${cmdArgs.environment}`);
+        } else {
+            CONSOLE_LOG.debug("No environments found in configuration to prompt for.");
+        }
     }
 
     configuration = resolveEnvironment(configuration, cmdArgs);

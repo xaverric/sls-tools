@@ -3,7 +3,9 @@
   "version": "1.11.2",
   "description": "Your daily helper tool you didn't know you needed",
   "main": "cli.js",
-  "scripts": {},
+  "scripts": {
+    "test": "jest"
+  },
   "author": "Daniel Jílek",
   "license": "ISC",
   "dependencies": {
@@ -31,5 +33,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/xaverric/sls-tools.git"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

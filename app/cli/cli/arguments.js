@@ -26,6 +26,12 @@ const cmdArgumentsDefinition = [
     description: 'Disable prompt feature.'
   },
   {
+    name: 'interactive',
+    alias: 'i',
+    type: Boolean,
+    description: 'Enable interactive prompt feature.'
+  },
+  {
     name: 'noconfig',
     type: Boolean,
     description: 'Flag defining whether the config should be loaded. Default value is set to false. This option might get handy when it is required to provide all parameters via CLI only.'

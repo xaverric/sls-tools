@@ -1,4 +1,5 @@
 const {CONSOLE_LOG} = require("../../../logger/logger");
+const { promptForChoices } = require("../../../utils/prompt/prompt-module.js");
 const {handleCmdExport} = require("./cmd/cmd-data-exporter");
 const {fullExport} = require("./zip/zip-exporter");
 const {handleK8sExport} = require("./k8s/k8s-data-exporter");
@@ -26,7 +27,23 @@ const _decideExporter = (type) => {
 
 const exportData = async (cmdArgs, configuration) => {
     CONSOLE_LOG.info(`Processing export for environment: ${configuration.uuApp.name}`);
-    for (const exportType of cmdArgs.exportType) {
+
+    if (cmdArgs.interactive && (!cmdArgs.exportType || cmdArgs.exportType.length === 0)) {
+        const availableTypes = ["cmd", "k8s"]; // Based on EXPORTERS structure
+        if (availableTypes.length > 0) {
+            CONSOLE_LOG.debug(`Prompting for export types. Available: ${availableTypes.join(', ')}`);
+            const selectedTypes = await promptForChoices('Select export type(s):', availableTypes, 'checkbox', 'exportType');
+            cmdArgs.exportType = selectedTypes;
+            CONSOLE_LOG.debug(`Export types selected via prompt: ${cmdArgs.exportType}`);
+        } else {
+            CONSOLE_LOG.debug("No export types available to prompt for.");
+        }
+    }
+
+    // Ensure cmdArgs.exportType is an array before iterating
+    const exportTypesToProcess = Array.isArray(cmdArgs.exportType) ? cmdArgs.exportType : [];
+
+    for (const exportType of exportTypesToProcess) {
         CONSOLE_LOG.info(`Exporting data using ${exportType} export type`);
         let filteredItems = configuration.exports.filter(item => item.exportType === exportType);
         filteredItems = filterById(cmdArgs, configuration, filteredItems);

@@ -41,5 +41,36 @@ const promptAccessCodes = async () =>{
 module.exports = {
     promptProceedAction,
     promptSecret,
-    promptAccessCodes
+    promptAccessCodes,
+    promptForEnvironment,
+    promptForChoices
+}
+
+async function promptForChoices(message, choices, type = 'list', name = 'selection') {
+  const answer = await inquirer.prompt([
+    {
+      type: type,
+      name: name,
+      message: message,
+      choices: choices,
+    },
+  ]);
+  return answer[name];
+}
+
+async function promptForEnvironment(availableEnvironments, cmdArgs) {
+  const choices = ["All Environments", ...availableEnvironments];
+  const { selectedEnvironment } = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'selectedEnvironment',
+      message: `Select environment for the '${cmdArgs.command}' command:`,
+      choices: choices,
+    },
+  ]);
+
+  if (selectedEnvironment === "All Environments") {
+    return undefined; // Signifies all environments
+  }
+  return selectedEnvironment; // Returns the specific environment name
 }
